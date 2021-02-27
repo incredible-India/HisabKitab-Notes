@@ -1,0 +1,52 @@
+
+@font-face {
+
+    src :url('./../fonts/new.ttf');
+    font-family: new;
+}
+
+.mainheading{
+    /* width: 100%; */
+    margin-top: 15px;
+text-align: center;
+}
+
+.n{
+    color: red;
+}
+.heading {
+    font-family: new, Courier, monospace;
+    font-size: 25px;
+    text-align: center;
+}
+
+.navigation{
+    margin-top: 9px;
+    width: 100%;
+    position: sticky;
+    top: 5px;
+    z-index: 99;
+
+}
+
+nav{
+    border-radius: 30px;
+    /* position: sticky;
+    top: 6px; */
+    /* top: 5px; */
+
+
+    
+}
+.headings {
+    font-family: new, Courier, monospace;
+    /* font-size: 25px; */
+    text-align: center;
+}
+
+.sildesIMg
+{
+    margin-top: 20px;
+}
+
+

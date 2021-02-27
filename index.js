@@ -8,6 +8,7 @@ const express  =require('express');//for the creating router
 const chalk =require('chalk');//beautify the console window of terminal
 const path = require('path');// for the path files or folders
 const morgan = require('morgan');//for the debugging 
+require('./database/dbsCon');//for the conncetion of database
 
 
 

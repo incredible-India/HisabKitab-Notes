@@ -55,7 +55,9 @@
             </div>
           </nav>
     </div>
-
+    <div class="alert alert-secondary" role="alert" style="display : none;">
+      Password did not matched
+    </div>
   <div class="container formBody">
       <h3 class="display-5">
        
@@ -63,17 +65,41 @@
       </h3>
       <i class="fas fa-user-circle" style="font-size: 55px; color: red;"></i>
       <div class="form-controlss">
-          <form action="/" method="post">
-           <input class="form-control" type="text" placeholder="username">
-           <input class="form-control" type="text" placeholder="Create password">
-           <input class="form-control" type="text" placeholder="Confirm password">
-           <button class="btn btn-primary"> Sign Up</button>
+          <form action="/savedatain" method="post" onsubmit="return checkValidation()">
+           <input class="form-control" type="text" placeholder="username" required>
+           <input class="form-control p1" type="text" placeholder="Create password" required>
+           <input class="form-control p1" type="text" placeholder="Confirm password" required>
+           <button class="btn btn-primary"  value="submit"> Sign Up</button>
            <button class="btn btn-warning"> <i class="fas fa-key"></i> Log in</button>
         </form>
       </div>
   </div>
 
 </body>
+<script>
+  function checkValidation(){
+    
 
+    let pass =document.getElementsByClassName('p1');//this is the password
+    let cnfpass =document.getElementsByClassName('p2');//this is the confirm password
+
+    event.preventDefault();
+    if(pass[0].value != cnfpass[0].value)
+    {
+      document.getElementsByClassName('alert')[0].style.display ="block";
+      return false ;
+    }else
+    {
+      return true ;
+    }
+
+  }
+
+  Array.from(document.getElementsByTagName('input')).forEach(element =>{
+    element.addEventListener('focusin',(event)=>{
+      document.getElementsByClassName('alert')[0].style.display ="none";
+    })
+  })
+</script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
 </html>

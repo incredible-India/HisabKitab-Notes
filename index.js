@@ -9,6 +9,7 @@ const chalk =require('chalk');//beautify the console window of terminal
 const path = require('path');// for the path files or folders
 const morgan = require('morgan');//for the debugging 
 require('./database/dbsCon');//for the conncetion of database
+const bodyParser = require('body-parser');//for the parsing data from the url
 
 
 
@@ -24,6 +25,8 @@ const _port  = process.env.PORT || 80 ; //this is the port number
 //using the middleware
 app.use(express.static(path.join('./src')))//tells about the satics files
 app.use(morgan('dev'));//for the debugging
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended :true})); //using the middle ware
 
 app.get('/',(req,res)=>{
     res.sendFile(path.join(__dirname,"./src/html/index.html"))
@@ -43,6 +46,17 @@ app.get('/newuser',(req,res)=>{
     res.status(200);
     res.setHeader('Content-Type','text/html');
     res.sendFile(path.join(__dirname , "./src/html/newUser.html"));//this will send an html of sign form
+
+})
+
+
+
+//for the new User
+
+app.post('/savedatain',async (req,res)=>{
+ 
+    
+
 
 })
 

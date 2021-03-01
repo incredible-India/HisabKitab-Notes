@@ -39,14 +39,14 @@ html(lang="en")
                             li.nav-item.dropdown
                                 a#navbarDropdownMenuLink.nav-link.dropdown-toggle(href='#' role='button' data-bs-toggle='dropdown' aria-expanded='false')
                                     i.fas.fa-user-circle
-                                    | User
+                                    | #{allinfo.name}
                                 ul.dropdown-menu(aria-labelledby='navbarDropdownMenuLink')
                                     li
                                         a.dropdown-item(href='/signin')
                                             i.fas.fa-key
-                                            | Sign in
+                                            | Extra
                                     li
                                         a.dropdown-item(href='/newuser')
                                             i.fas.fa-user-plus
-                                            | New Use
+                                            | Logout
         

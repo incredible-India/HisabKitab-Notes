@@ -14,6 +14,8 @@ const { check, validationResult } = require('express-validator');//it will check
 const UserDBS = require('./model/user');//user database 
 const cookieParser = require('cookie-parser');//for the cookies
 const pug = require('pug');//templates engine..
+const userauth = require('./authentication/auth');//user authentication 
+// const { info } = require('console');
 
 
 //creating server
@@ -26,9 +28,7 @@ const _port  = process.env.PORT || 80 ; //this is the port number
 
 //setting the pug templates engine
 app.set('view engine','pug');
-app.set('views',path.join(
-    __dirname,'./views'
-));
+app.set('views',path.join(__dirname,"./views/"))
 
 //using the middleware
 app.use(express.static(path.join('./src')))//tells about the satics files
@@ -37,9 +37,29 @@ app.use(bodyParser.json());//for parsing data in json formate
 app.use(bodyParser.urlencoded({ extended : false }));
 app.use(cookieParser());//cookies middleware
 
-app.get('/',(req,res)=>{
-    res.sendFile(path.join(__dirname,"./src/html/index.html"))
+
+//routing  for the home page
+
+
+app.get('/', userauth ,async (req,res)=>{
+
+    let infoUser = await req.isAurthised;
+
+    if(infoUser)
+    {
+        return  res.status(200).render('index',{
+
+            allinfo :  infoUser
+        })
+    
+  
+    }else
+    {
+        return res.status(200).sendFile(path.join(__dirname,"./src/html/index.html"))
+    }
+  
 })
+
 
 app.get('/signin',(req,res)=>{
 

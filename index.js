@@ -15,6 +15,7 @@ const UserDBS = require('./model/user');//user database
 const cookieParser = require('cookie-parser');//for the cookies
 const pug = require('pug');//templates engine..
 const userauth = require('./authentication/auth');//user authentication 
+const user = require('./model/user');
 // const { info } = require('console');
 
 
@@ -123,7 +124,7 @@ app.post('/savedatain',[
 
 
 //for the log out 
-app.get('/logout',async(req,res)=>{
+app.get('/logout',userauth,async(req,res)=>{
 
     let UserAuth = await req.isAurthised;  //it will return either document of user or null
 
@@ -140,6 +141,72 @@ app.get('/logout',async(req,res)=>{
         return res.redirect('/');
 
     }
+})
+
+//after  the sign form 
+app.post('/showhomepage',async(req,res)=>{
+    
+    
+    let isAuth = await user.findOne({password : req.body.password})
+
+    let CheckData = req.body; //userinformation from the sign in form
+
+// console.log(CheckData);
+
+    if(isAuth != null)
+    {
+        if(CheckData.username == isAuth.name)
+        {
+            if(CheckData.password == isAuth.password)
+            {
+
+                const tokenlogin = isAuth.generateTheToken();
+
+                res.cookie("notes", tokenlogin, { expires: new Date(Date.now() + (24 * 60 * 60 * 1000)) });//we set the expairy date for 24 hrs
+
+
+                return res.status(200).redirect('/');
+
+            }else
+            {
+                return res.json({
+                    message : "incoorect username or password.."
+                })
+            }
+        }else
+        {
+            return res.json({
+                message : "incoorect username or password.."
+            })
+        }
+    }else
+    {
+        return res.json({
+            message : "Error in sign in try latar"
+        })
+    }
+})
+
+
+
+//for the mynotes 
+
+app.get('/mynotes',userauth,async (req,res)=>{
+
+    let isUser = await req.isAurthised; //if user is Aurthorised is return his document otherwise it will return null
+
+    if(isUser)
+    {
+        return res.status(200).render('note',{
+            allinfo : isUser //this is the user infomrations
+        })
+
+    }else
+    {
+        return res.status(200).redirect('/signin');//is user is not aurthorised
+    }
+
+
 })
 app.listen(_port,()=>{
 

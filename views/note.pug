@@ -9,6 +9,9 @@ html(lang="en")
         script(src='https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js' integrity='sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0' crossorigin='anonymous')
         style 
             include ./../src/css/index.css
+            include ./../src/css/note.css
+        script
+            include ./../src/javascript/note.js
     body
         .mainheadin.container
             h1.heading
@@ -50,3 +53,31 @@ html(lang="en")
                                             i.fas.fa-user-plus
                                             | Logout
         
+
+
+        .container.imgopt 
+            .imgoption
+                img.img-fluid(src='./images/notes.jpg')
+
+        .container.box 
+            button.btn.btn-secondary(type='button' data-bs-toggle='modal' data-bs-target='#staticBackdrop')
+                | Add Notes
+    
+            #staticBackdrop.modal.fade(data-bs-backdrop='static' data-bs-keyboard='false' tabindex='-1' aria-labelledby='staticBackdropLabel' aria-hidden='true')
+                .modal-dialog
+                    .modal-content
+                        .modal-header
+                            h5#staticBackdropLabel.modal-title Modal title
+                            button.btn-close(type='button' data-bs-dismiss='modal' aria-label='Close')
+                        .modal-body
+                            form(action="/savemynotes", method="post") 
+
+                                textarea.form-control(name="mynotes", rows="3" cols="30") 
+
+                        .modal-footer
+                            button.btn.btn-danger(type='button' data-bs-dismiss='modal') Close
+                            button.btn.btn-warning#submitIt(type='button') Add Notes
+
+
+
+

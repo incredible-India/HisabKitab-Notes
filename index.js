@@ -10,7 +10,10 @@ const path = require('path');// for the path files or folders
 const morgan = require('morgan');//for the debugging 
 require('./database/dbsCon');//for the conncetion of database
 const bodyParser = require('body-parser');//for the parsing data from the url
-
+const { check, validationResult } = require('express-validator');//it will check the form validation on server
+const UserDBS = require('./model/user');//user database 
+const cookieParser = require('cookie-parser');//for the cookies
+const pug = require('pug');//templates engine..
 
 
 //creating server
@@ -21,12 +24,18 @@ const app =express();
 
 const _port  = process.env.PORT || 80 ; //this is the port number
 
+//setting the pug templates engine
+app.set('view engine','pug');
+app.set('views',path.join(
+    __dirname,'./views'
+));
 
 //using the middleware
 app.use(express.static(path.join('./src')))//tells about the satics files
 app.use(morgan('dev'));//for the debugging
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended :true})); //using the middle ware
+app.use(bodyParser.json());//for parsing data in json formate
+app.use(bodyParser.urlencoded({ extended : false }));
+app.use(cookieParser());//cookies middleware
 
 app.get('/',(req,res)=>{
     res.sendFile(path.join(__dirname,"./src/html/index.html"))
@@ -53,10 +62,42 @@ app.get('/newuser',(req,res)=>{
 
 //for the new User
 
-app.post('/savedatain',async (req,res)=>{
- 
+app.post('/savedatain',[
+    //checking the form on server side..
     
+    check('name').not().isEmpty().trim(),
+    check('pass').not().isEmpty().trim(),
+    check('cnfpass').not().isEmpty().trim(),
 
+
+],async (req,res)=>{
+ 
+    const errorInform = validationResult(req);
+
+    if(!errorInform.isEmpty())
+    {
+        return res.json({
+            message : "form validation error on server"
+            ,error : errorInform
+        })
+    }
+
+    let savedata = UserDBS ({
+        name : req.body.name,
+        password : req.body.pass
+    })
+
+    const token = savedata.generateTheToken();  //it will generate the token when user will registration itself
+    if(token)
+    {
+        res.cookie('notes', token, { expires: new Date(Date.now() + (24 * 60 * 60 * 1000)) });
+
+        return res.status(200).redirect('/')
+    }else
+    {
+        res.json("password must be unique")
+    }
+    
 
 })
 

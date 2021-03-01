@@ -65,10 +65,10 @@
       </h3>
       <i class="fas fa-user-circle" style="font-size: 55px; color: red;"></i>
       <div class="form-controlss">
-          <form action="/savedatain" method="post" onsubmit="return checkValidation()">
-           <input class="form-control" type="text" placeholder="username" required>
-           <input class="form-control p1" type="text" placeholder="Create password" required>
-           <input class="form-control p1" type="text" placeholder="Confirm password" required>
+          <form action="/savedatain" method="POST" onsubmit="return checkValidation()">
+           <input class="form-control" type="text" name="name" placeholder="username" required>
+           <input class="form-control p1" type="password" name="pass" placeholder="Create password" required>
+           <input class="form-control p2" type="password" name="cnfpass" placeholder="Confirm password" required>
            <button class="btn btn-primary"  value="submit"> Sign Up</button>
            <button class="btn btn-warning"> <i class="fas fa-key"></i> Log in</button>
         </form>
@@ -84,12 +84,16 @@
     let cnfpass =document.getElementsByClassName('p2');//this is the confirm password
 
     event.preventDefault();
+
     if(pass[0].value != cnfpass[0].value)
     {
       document.getElementsByClassName('alert')[0].style.display ="block";
       return false ;
     }else
     {
+      // location.href='/savedatain'
+      // document.forms[0].action = "/savedatain"
+      document.forms[0].submit();
       return true ;
     }
 

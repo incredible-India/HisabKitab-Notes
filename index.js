@@ -121,6 +121,26 @@ app.post('/savedatain',[
 
 })
 
+
+//for the log out 
+app.get('/logout',async(req,res)=>{
+
+    let UserAuth = await req.isAurthised;  //it will return either document of user or null
+
+    if (UserAuth) {
+
+        // console.log(UserAuth);
+        UserAuth.tokenSchema = []; //this logout from all devices and make token emapty in dbs
+        res.clearCookie('notes');  //clear the cookies
+        UserAuth.save(); //save changes the data in dbs
+        return res.redirect('/'); //redirect the home page
+
+    } else {
+        res.clearCookie('notes');
+        return res.redirect('/');
+
+    }
+})
 app.listen(_port,()=>{
 
     console.log(chalk.bgCyanBright.redBright(process.env.SUCCESS_MESSAGE));

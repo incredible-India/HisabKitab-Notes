@@ -24,15 +24,57 @@ document.getElementById('saveit').addEventListener('click',function(event){
 
 //now we need to fetch the api 
 
+  let color = ["info","dark","primary","light","secondary","warning","danger"]
 
-fetch('http://localhost:80/showNotes/for/fetching')
+  let k=0;
+  let p=1;
 
-.then(data =>{
+    fetch('http://localhost/showNotes/for/fetching')
 
-    return data.json()
+    .then(function (data){
 
-}
-.then(finaldata =>
-    {
-    return finaldata
-  })
+        return data.json()
+
+    }).then(function(finalData){
+  
+         let mainDIV = document.getElementsByClassName('cards')[0];
+
+         for (i in finalData.notes) {
+
+            for(j in finalData.notes[i])
+         
+            {
+                ++k;
+            
+
+                if(k>7)
+                {
+                    k=0;
+                }
+                if(k==3)
+                {
+                    p=1
+                }
+                if(k==1)
+                {
+                    p=3
+                }
+               
+                
+                mainDIV.innerHTML += `<div class="card text-${color[p]} bg-${color[k]} mb-3" style="max-width: 18rem;">
+                <div class="card-header">My Notes</div>
+                <div class="card-body">
+                  <h5 class="card-title">${finalData.notes[i].date}</h5>
+                  <p class="card-text">${finalData.notes[i].notes}.</p>
+                </div>
+              </div>`
+              
+            
+            
+            }
+
+         }
+
+        
+
+    })

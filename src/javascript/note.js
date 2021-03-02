@@ -22,3 +22,17 @@ document.getElementById('saveit').addEventListener('click',function(event){
 
 })
 
+//now we need to fetch the api 
+
+
+fetch('http://localhost:80/showNotes/for/fetching')
+
+.then(data =>{
+
+    return data.json()
+
+}
+.then(finaldata =>
+    {
+    return finaldata
+  })

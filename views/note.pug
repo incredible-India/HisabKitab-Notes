@@ -81,15 +81,18 @@ html(lang="en")
 
         hr
 
+        //- -var color = [dark,primary,secondary,info,light,success,warning,danger]
+
         .container.cards
-            for i,j in notes
-                .card.text-white.bg-primary.mb-3(style='max-width: 18rem;')
-                    .card-header My Notes
-                    .card-body
-                        h5.card-title #{notes[j].date}
-                        p.card-text #{notes[j].notes}
-                    .card-footer 
-                        a.btn.btn-primary(href="#") Delete Note
+            //- for i,j in notes
+               
+            //-     .card.text-white.bg-primary.mb-3(style='max-width: 18rem;')
+            //-         .card-header My Notes
+            //-         .card-body
+            //-             h5.card-title #{notes[j].date}
+            //-             p.card-text #{notes[j].notes}
+            //-         .card-footer 
+            //-             a.btn.btn-primary(href="#") Delete Note
     script
             include ./../src/javascript/note.js
 

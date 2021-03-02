@@ -173,12 +173,12 @@ app.post('/showhomepage', async (req, res) => {
 
             } else {
                 return res.json({
-                    message: "incoorect username or password.."
+                    message: "incorrect username or password.."
                 })
             }
         } else {
             return res.json({
-                message: "incoorect username or password.."
+                message: "incorrect username or password.."
             })
         }
     } else {
@@ -227,6 +227,25 @@ app.post('/savemynotes', userauth, async (req, res) => {
         return res.status(200).redirect('/signin'); //is user is not aurthorised
     }
 
+
+
+})
+
+app.get('/showNotes/for/fetching',userauth,async(req,res)=>{
+   
+    
+    let isAuth = await req.isAurthised;
+// console.log(isAuth.notes);
+    if(isAuth)
+    {
+        return res.json({
+
+            notes : isAuth.notes
+        })
+    }else
+    {
+        return null
+    }
 
 
 })

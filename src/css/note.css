@@ -6,8 +6,29 @@
 }
 
 .box {
+    
+    margin-top: 20px;
+}
+
+textarea{
+    width: 100%;
+}
+form{
+    margin-top: 10px;
+
+}
+.note{
+    margin-top: 15px;
+}
+
+.box{
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 20px;
+}
+
+.cards{
+    display: grid;
+    /* flex-direction: row; */
+   grid-row: 3;
 }

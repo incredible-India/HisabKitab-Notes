@@ -4,14 +4,13 @@ html(lang="en")
         meta(charset="UTF-8")
         meta(http-equiv="X-UA-Compatible", content="IE=edge")
         meta(name="viewport", content="width=device-width, initial-scale=1.0")
-        title Hishab_Kitab Notes
+        title My Notes
         link(href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl' crossorigin='anonymous')
         script(src='https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js' integrity='sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0' crossorigin='anonymous')
         style 
             include ./../src/css/index.css
             include ./../src/css/note.css
-        script
-            include ./../src/javascript/note.js
+        
     body
         .mainheadin.container
             h1.heading
@@ -60,7 +59,7 @@ html(lang="en")
                 img.img-fluid(src='./images/notes.jpg')
 
         .container.box 
-            button.btn.btn-secondary(type='button' data-bs-toggle='modal' data-bs-target='#staticBackdrop')
+            button.btn.btn-secondary#submitIt(type='button' data-bs-toggle='modal' data-bs-target='#staticBackdrop')
                 | Add Notes
     
             #staticBackdrop.modal.fade(data-bs-backdrop='static' data-bs-keyboard='false' tabindex='-1' aria-labelledby='staticBackdropLabel' aria-hidden='true')
@@ -72,11 +71,27 @@ html(lang="en")
                         .modal-body
                             form(action="/savemynotes", method="post") 
 
-                                textarea.form-control(name="mynotes", rows="3" cols="30") 
+                                textarea.form-control(name="mynotes", rows="3" cols="30" required) 
 
                         .modal-footer
                             button.btn.btn-danger(type='button' data-bs-dismiss='modal') Close
-                            button.btn.btn-warning#submitIt(type='button') Add Notes
+                            button.btn.btn-warning#saveit(type='button') Add Notes
+            
+
+
+        hr
+
+        .container.cards
+            for i,j in notes
+                .card.text-white.bg-primary.mb-3(style='max-width: 18rem;')
+                    .card-header My Notes
+                    .card-body
+                        h5.card-title #{notes[j].date}
+                        p.card-text #{notes[j].notes}
+                    .card-footer 
+                        a.btn.btn-primary(href="#") Delete Note
+    script
+            include ./../src/javascript/note.js
 
 
 

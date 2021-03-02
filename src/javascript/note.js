@@ -1,12 +1,24 @@
 
-document.getElementById('submitIt').addEventListener('click',(event)=>{
-    let mynotes = document.getElementsByTagName('textarea')[0].value
+// console.log(document.getElementsByTagName('textarea')[0].value.length);
+document.getElementById('saveit').addEventListener('click',function(event){
 
-    if(mynotes != "")
-    {
-        document.forms[0].submit();
-    }else
-    {
-        alert("Cannot save Blank Notes..")
+  let noteContent = document.getElementsByTagName('textarea')[0].value;
+    // console.log(document.getElementsByTagName('textarea')[0].value);
+
+    if(noteContent.length <= 1){
+      
+    
+
+        alert("Note s Content Can`t be blank")
+
+        return ;
     }
+    else
+    {
+      
+        document.forms[0].submit();
+    }
+
+
 })
+

@@ -19,7 +19,9 @@ const cookieParser = require('cookie-parser'); //for the cookies
 const pug = require('pug'); //templates engine..
 const userauth = require('./authentication/auth'); //user authentication 
 const user = require('./model/user');
-const { findOne } = require('./model/user');
+const {
+    findOne
+} = require('./model/user');
 // const { info } = require('console');
 
 
@@ -200,7 +202,8 @@ app.get('/mynotes', userauth, async (req, res) => {
     if (isUser) {
         return res.status(200).render('note', {
             allinfo: isUser //this is the user infomrations,
-            ,notes : isUser.notes
+                ,
+            notes: isUser.notes
         })
 
     } else {
@@ -212,21 +215,21 @@ app.get('/mynotes', userauth, async (req, res) => {
 
 // for the saving the notes in database 
 app.post('/savemynotes', userauth, async (req, res) => {
-    
+
     let isUser = await req.isAurthised; //if user is Aurthorised is return his document otherwise it will return null
     let date = new Date();
 
-    if(isUser)
-    {
-        isUser.notes =   isUser.notes.concat( {notes : req.body.mynotes.trim(),
-        date : `${date.getDate()}/${date.getMonth()+1}/${date.getFullYear()} `
-        , uniqueNumber : Date.now()
-     });
+    if (isUser) {
+        isUser.notes = isUser.notes.concat({
+            notes: req.body.mynotes.trim(),
+            date: `${date.getDate()}/${date.getMonth()+1}/${date.getFullYear()} `,
+            uniqueNumber: Date.now()
+        });
         isUser.save()
-    
+
         res.redirect('/mynotes')
 
-    }else{
+    } else {
         return res.status(200).redirect('/signin'); //is user is not aurthorised
     }
 
@@ -234,19 +237,17 @@ app.post('/savemynotes', userauth, async (req, res) => {
 
 })
 
-app.get('/showNotes/for/fetching',userauth,async(req,res)=>{
-   
-    
+app.get('/showNotes/for/fetching', userauth, async (req, res) => {
+
+
     let isAuth = await req.isAurthised;
-// console.log(isAuth.notes);
-    if(isAuth)
-    {
+    // console.log(isAuth.notes);
+    if (isAuth) {
         return res.json({
 
-            notes : isAuth.notes
+            notes: isAuth.notes
         })
-    }else
-    {
+    } else {
         return null
     }
 
@@ -255,41 +256,58 @@ app.get('/showNotes/for/fetching',userauth,async(req,res)=>{
 
 //for deleting the notes from the list
 
-app.get('/delete/thisNote/:uniNumber',userauth,async(req,res)=>{
+app.get('/delete/thisNote/:uniNumber', userauth, async (req, res) => {
 
-    let isAuthenticate = await req.isAurthised;//this will check the user aurthority
+    let isAuthenticate = await req.isAurthised; //this will check the user aurthority
     let NumUrl = req.params.uniNumber //this is the number from url
 
 
-    if(isAuthenticate)
-    {
-       try {
+    if (isAuthenticate) {
+        try {
 
-        let value = NumUrl;
+            let value = NumUrl;
 
-        // isAuthenticate.notes = isAuthenticate.notes
-        
-        isAuthenticate.notes = isAuthenticate.notes.filter(item => item.uniqueNumber != value)//it will remove the element from the array
+            // isAuthenticate.notes = isAuthenticate.notes
 
-        isAuthenticate.save();
-        
-        // console.log(arr)
-      
-        return res.redirect('/mynotes')
+            isAuthenticate.notes = isAuthenticate.notes.filter(item => item.uniqueNumber != value) //it will remove the element from the array
 
-       } catch (error) {
+            isAuthenticate.save();
 
-           return res.json({
+            // console.log(arr)
 
-               message : "we are facing the server issue... "
-           })
-       }
-    }else
-    {
+            return res.redirect('/mynotes')
+
+        } catch (error) {
+
+            return res.json({
+
+                message: "we are facing the server issue... "
+            })
+        }
+    } else {
         return res.status(200).redirect('/signin'); //is user is not aurthorised
     }
 
 
+
+})
+
+//for the deleting the all notes from the database also
+app.get('/delete/All', userauth, async (req, res) => {
+
+    let _user = await req.isAurthised;
+
+    if(_user)
+    {
+            _user.notes = []
+            _user.save();
+            
+            return res.redirect('/mynotes');
+
+    }else
+    {
+        return res.status(200).redirect('/signin'); //is user is not aurthorised
+    }
 
 })
 

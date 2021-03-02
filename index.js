@@ -19,6 +19,7 @@ const cookieParser = require('cookie-parser'); //for the cookies
 const pug = require('pug'); //templates engine..
 const userauth = require('./authentication/auth'); //user authentication 
 const user = require('./model/user');
+const { findOne } = require('./model/user');
 // const { info } = require('console');
 
 
@@ -218,7 +219,9 @@ app.post('/savemynotes', userauth, async (req, res) => {
     if(isUser)
     {
         isUser.notes =   isUser.notes.concat( {notes : req.body.mynotes.trim(),
-        date : `${date.getDate()}/${date.getMonth()+1}/${date.getFullYear()} `} );
+        date : `${date.getDate()}/${date.getMonth()+1}/${date.getFullYear()} `
+        , uniqueNumber : Date.now()
+     });
         isUser.save()
     
         res.redirect('/mynotes')
@@ -249,6 +252,48 @@ app.get('/showNotes/for/fetching',userauth,async(req,res)=>{
 
 
 })
+
+//for deleting the notes from the list
+
+app.get('/delete/thisNote/:uniNumber',userauth,async(req,res)=>{
+
+    let isAuthenticate = await req.isAurthised;//this will check the user aurthority
+    let NumUrl = req.params.uniNumber //this is the number from url
+
+
+    if(isAuthenticate)
+    {
+       try {
+
+        let value = NumUrl;
+
+        // isAuthenticate.notes = isAuthenticate.notes
+        
+        isAuthenticate.notes = isAuthenticate.notes.filter(item => item.uniqueNumber != value)//it will remove the element from the array
+
+        isAuthenticate.save();
+        
+        // console.log(arr)
+      
+        return res.redirect('/mynotes')
+
+       } catch (error) {
+
+           return res.json({
+
+               message : "we are facing the server issue... "
+           })
+       }
+    }else
+    {
+        return res.status(200).redirect('/signin'); //is user is not aurthorised
+    }
+
+
+
+})
+
+
 app.listen(_port, () => {
 
     console.log(chalk.bgCyanBright.redBright(process.env.SUCCESS_MESSAGE));

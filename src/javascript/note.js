@@ -41,9 +41,9 @@ document.getElementById('saveit').addEventListener('click',function(event){
 
          for (i in finalData.notes) {
 
-            for(j in finalData.notes[i])
+          
          
-            {
+            
                 ++k;
             
 
@@ -61,17 +61,19 @@ document.getElementById('saveit').addEventListener('click',function(event){
                 }
                
                 
-                mainDIV.innerHTML += `<div class="card text-${color[p]} bg-${color[k]} mb-3" style="max-width: 18rem;">
+                mainDIV.innerHTML += `
+                <div class="alllnotes">
+                <div class="card text-${color[p]} bg-${color[k]} mb-3" style="max-width: 18rem;">
                 <div class="card-header">My Notes</div>
                 <div class="card-body">
                   <h5 class="card-title">${finalData.notes[i].date}</h5>
                   <p class="card-text">${finalData.notes[i].notes}.</p>
                 </div>
-              </div>`
-              
-            
-            
-            }
+                <div class="card-footer">
+                <a class="btn btn-${color[k]}" href="/delete/thisNote/${finalData.notes[i].uniqueNumber}"> Delete It </a>
+                </div>
+              </div>
+                </div>`
 
          }
 

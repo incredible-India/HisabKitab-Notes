@@ -30,5 +30,22 @@ form{
 .cards{
     display: grid;
     /* flex-direction: row; */
-   grid-row: 3;
+   grid : 200px / auto auto auto ;
+   /* box-shadow: 0 0 5px , 0 0 10px; */
+
+}
+@media (max-width : 400px)
+{
+    .cards {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+    }
+}
+
+.card{
+
+    box-shadow: 0 1px 5px, 0 1px 10px;
 }

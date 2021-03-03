@@ -312,6 +312,28 @@ app.get('/delete/All', userauth, async (req, res) => {
 })
 
 
+//for the expenses management....
+
+//simple router
+
+app.get('/myexpanses',userauth,async (req,res)=>{
+
+    let user  = await req.isAurthised;
+
+    if(user)
+    {
+        return res.render('expenses',{
+            allinfo : user
+        })
+
+    }else
+    {
+        return res.status(200).redirect('/signin'); //is user is not aurthorised
+    }
+
+
+})
+
 app.listen(_port, () => {
 
     console.log(chalk.bgCyanBright.redBright(process.env.SUCCESS_MESSAGE));

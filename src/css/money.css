@@ -1,0 +1,58 @@
+.imgMoney{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 29px;
+  
+}
+
+img{
+    border-radius: 50%;
+}
+
+@font-face {
+
+    src :url('./../fonts/new.ttf');
+    font-family: new;
+}
+
+.all{
+    font-family: new;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.E{
+    color: red;
+
+}
+
+.dateinfo {
+    /* display: flex;
+    justify-content: center;
+    align-items: center; */
+    margin-top: 20px;
+    width: 100%;
+}
+
+.inputbox {
+    margin-top: 10px;
+}
+
+.input-group-text{
+    background-color: red;
+    color: black;
+cursor: pointer;
+}
+
+.buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-left: 10px;
+    /* justify-content: space-evenly; */
+    margin-top: 10px;
+}
+button{
+    margin-left: 10px;
+}

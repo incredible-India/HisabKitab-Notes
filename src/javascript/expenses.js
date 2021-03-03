@@ -18,15 +18,27 @@ AddoneButton.addEventListener('click',(event)=>{
     document.getElementsByClassName('inputbox')[0].innerHTML += `
     
     
-    <div class="input-group mb-3 ${i++}">
-  <input type="text" class="form-control" placeholder="Username" aria-label="Title of Expenses">
-  <span class="input-group-text removeIt"> - </span>
+    <div class="input-group mb-3 remove${i++}">
+  <input type="text" class="form-control" placeholder="Title of Expenses" aria-label="Title of Expenses">
+  <span class="input-group-text remove${i} rmv"> - </span>
   <input type="text" class="form-control" placeholder="Ammount" aria-label="Server">
   </div>
 
   `
 
 
-})
+  Array.from(document.getElementsByClassName('rmv')).forEach(ele=>{
 
+    ele.addEventListener('click',(event)=>{
+
+      ele.parentElement.remove();
+
+    })
+
+  })
+
+
+  
+
+})
 

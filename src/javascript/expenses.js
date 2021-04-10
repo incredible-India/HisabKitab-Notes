@@ -26,7 +26,7 @@ AddoneButton.addEventListener('click',(event)=>{
 
   `
 
-
+//for removing the things
   Array.from(document.getElementsByClassName('rmv')).forEach(ele=>{
 
     ele.addEventListener('click',(event)=>{

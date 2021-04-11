@@ -14,24 +14,27 @@ let i=0;
 AddoneButton.addEventListener('click',(event)=>{
 
     //this will add the one input
-
-    document.getElementsByClassName('inputbox')[0].innerHTML += `
+   
+    document.getElementsByClassName('inputgrps')[0].innerHTML += `
     
-    
+    <div class="container inputbox">
     <div class="input-group mb-3 remove${i++}">
-  <input type="text" class="form-control" placeholder="Title of Expenses" aria-label="Title of Expenses">
+  <input type="text" class="form-control" placeholder="Title of Expenses" aria-label="Title of Expenses" id="title${i}">
   <span class="input-group-text remove${i} rmv"> - </span>
   <input type="text" class="form-control" placeholder="Ammount" aria-label="Server">
   </div>
+  </div>
 
   `
+
 
 //for removing the things
   Array.from(document.getElementsByClassName('rmv')).forEach(ele=>{
 
     ele.addEventListener('click',(event)=>{
 
-      ele.parentElement.remove();
+      ele.parentElement.remove();//this will remove the element
+     // ele.parentElement.remove();
 
     })
 

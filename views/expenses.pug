@@ -12,7 +12,7 @@ html(lang="en")
         style
             include ./../src/css/money.css
       
-        
+
     body
         .mainheadin.container
             h1.heading
@@ -64,17 +64,36 @@ html(lang="en")
         
         .container.dateinfo 
         
-
-        .container.inputbox 
-             .input-group.mb-3
-                input.form-control(type='text' placeholder='Title of Expenses' aria-label='Username')
-                span.input-group-text ₹
-                input.form-control(type='text' placeholder='Ammount' aria-label='Server')
+        .container.inputgrps
+            .container.inputbox 
+                .input-group.mb-3
+                    input.form-control#title0(type='text' placeholder='Title of Expenses' aria-label='Username')
+                    span.input-group-text ₹
+                    input.form-control(type='text' placeholder='Ammount' aria-label='Server')
            
         .container.button
             .buttons 
                 button.btn.btn-warning.addone Add One 
                 button.btn.btn-success Calculate
+                button.btn.btn-primary(type='button' data-bs-toggle='modal' data-bs-target='#exampleModal')
+                    | Calculator
+
+        
+
+
+
+
+    #exampleModal.modal.fade(tabindex='-1' aria-labelledby='exampleModalLabel' aria-hidden='true')
+        .modal-dialog
+            .modal-content
+                .modal-header
+                    h5#exampleModalLabel.modal-title Calculator
+                    button.btn-close(type='button' data-bs-dismiss='modal' aria-label='Close')
+                .modal-body
+                    textarea.form-control(name="calc", cols="30", rows="5" placeholder="enter exression (eg : 2+2-6) ") 
+                .modal-footer
+                    button.btn.btn-secondary(type='button' data-bs-dismiss='modal') Close
+                    button.btn.btn-primary(type='button') Save changes
 
 
     script 

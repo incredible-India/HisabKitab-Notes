@@ -45,3 +45,24 @@ AddoneButton.addEventListener('click',(event)=>{
 
 })
 
+
+
+//for the calculator in modal
+
+let buttonOfCALC = document.getElementsByClassName('doCalulation')
+
+
+buttonOfCALC[0].addEventListener('click',event=>{
+
+        let givenData = document.getElementsByClassName('calIT'); //textarea class
+
+        try {
+
+          let FinalData = eval(givenData[0].value);
+
+          givenData[0].value = FinalData;
+          
+        } catch (error) {
+          givenData[0].value = "Incorrect Expression"
+        }
+})

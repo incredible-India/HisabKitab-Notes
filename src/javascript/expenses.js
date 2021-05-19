@@ -15,20 +15,30 @@ AddoneButton.addEventListener('click',(event)=>{
 
     //this will add the one input
    
-    document.getElementsByClassName('inputxx')[0].innerHTML += `
+  //   document.getElementsByClassName('inputgrps')[0].innerHTML += `
     
-    <div class="container inputbox">
-    <div class="input-group mb-3 remove${i++}">
-  <input type="text" class="form-control" placeholder="Title of Expenses" aria-label="Title of Expenses" id="title${i}">
-  <span class="input-group-text remove${i} rmv"> - </span>
-  <input type="text" class="form-control" placeholder="Ammount" aria-label="Server">
-  </div>
-  </div>
+  //   <div class="container inputbox">
+  //   <div class="input-group mb-3 remove${i++}">
+  // <input type="text" class="form-control" placeholder="Title of Expenses" aria-label="Title of Expenses" id="title${i}" autofocus>
+  // <span class="input-group-text remove${i} rmv"> - </span>
+  // <input type="text" class="form-control" placeholder="Ammount" aria-label="Server">
+  // </div>
+  // </div>
 
-  `
+  // `
 //start from here//
+let newDiv =document.createElement('div')
+newDiv.setAttribute('class', 'container');
 
+newDiv.innerHTML += `<div class="container inputbox">
+<div class="input-group mb-3 remove${i++}">
+<input type="text" class="form-control" placeholder="Title of Expenses" aria-label="Title of Expenses" id="title${i}" autofocus>
+<span class="input-group-text remove${i} rmv"> - </span>
+<input type="text" class="form-control" placeholder="Ammount" aria-label="Server">
+</div>
+</div>`
 
+document.getElementsByClassName('inputgrps')[0].appendChild(newDiv)
 
 
 //for removing the things

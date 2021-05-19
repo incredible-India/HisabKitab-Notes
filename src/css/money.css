@@ -56,3 +56,12 @@ cursor: pointer;
 button{
     margin-left: 10px;
 }
+
+
+.makitsticky{
+    margin-bottom: 15px;
+    margin-top:15px;
+    position: sticky;
+    z-index: 99;
+    bottom: 15px;
+}

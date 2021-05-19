@@ -15,7 +15,7 @@ AddoneButton.addEventListener('click',(event)=>{
 
     //this will add the one input
    
-    document.getElementsByClassName('inputgrps')[0].innerHTML += `
+    document.getElementsByClassName('inputxx')[0].innerHTML += `
     
     <div class="container inputbox">
     <div class="input-group mb-3 remove${i++}">

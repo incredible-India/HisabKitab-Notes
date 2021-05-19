@@ -1,8 +1,10 @@
 
 let date = new Date()
 
-document.getElementsByClassName('dateinfo')[0].innerHTML =`<h3 class = "bg-light" >
-${date.getDate()}\\${date.getMonth()}\\${date.getUTCFullYear()}</h3>
+document.getElementsByClassName('dateinfo')[0].innerHTML =`<h3 style="text-align: right;">
+${date.getDate()}\\${date.getMonth()}\\<span class="n">${date.getUTCFullYear()}</span></h3>
+
+<h3 title = "total expanses" style="text-align: left;"> <span class = "n">T</span>otal : <span class="numberCount">1</span></h3> </h3>
 
 `
 
@@ -28,26 +30,30 @@ AddoneButton.addEventListener('click',(event)=>{
   // `
 //start from here//
 let newDiv =document.createElement('div')
-newDiv.setAttribute('class', 'container');
+newDiv.setAttribute('class', 'container inputgrps');
 
 newDiv.innerHTML += `<div class="container inputbox">
 <div class="input-group mb-3 remove${i++}">
-<input type="text" class="form-control" placeholder="Title of Expenses" aria-label="Title of Expenses" id="title${i}" autofocus>
+<input type="text" class="form-control" placeholder="Title of Expenses" aria-label="Title of Expenses" id="title${i}" >
 <span class="input-group-text remove${i} rmv"> - </span>
-<input type="text" class="form-control" placeholder="Ammount" aria-label="Server">
+<input type="text" class="form-control ctpp" placeholder="Ammount" aria-label="Server">
 </div>
 </div>`
 
-document.getElementsByClassName('inputgrps')[0].appendChild(newDiv)
-
+document.getElementsByClassName('allboxes')[0].appendChild(newDiv);
+document.getElementsByClassName('numberCount')[0].innerText = document.getElementsByClassName('ctpp').length; //it will increase the value of number of expanses
+//////////////////////////////////////////////////////////
 
 //for removing the things
   Array.from(document.getElementsByClassName('rmv')).forEach(ele=>{
 
     ele.addEventListener('click',(event)=>{
 
+       
       ele.parentElement.remove();//this will remove the element
-     // ele.parentElement.remove();
+      document.getElementsByClassName('numberCount')[0].innerText = document.getElementsByClassName('ctpp').length;
+ 
+   
 
     })
 
@@ -79,3 +85,6 @@ buttonOfCALC[0].addEventListener('click',event=>{
           givenData[0].value = "Incorrect Expression"
         }
 })
+
+
+//for the clulating the the all expanses....

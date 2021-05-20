@@ -1,9 +1,12 @@
 
 
-let date = new Date()
+let TodayDate = new Date()
+var Expnasese = new Object;
+Expnasese.data = new Array;
+
 
 document.getElementsByClassName('dateinfo')[0].innerHTML = `<h3 style="text-align: right;">
-${date.getDate()}\\${date.getMonth()}\\<span class="n">${date.getUTCFullYear()}</span></h3>
+${TodayDate.getDate()}\\${TodayDate.getMonth()}\\<span class="n">${TodayDate.getUTCFullYear()}</span></h3>
 
 <h3 title = "total expanses" style="text-align: left;"> <span class = "n">T</span>otal : <span class="numberCount">1</span></h3> </h3>
 
@@ -93,7 +96,7 @@ buttonOfCALC[0].addEventListener('click', event => {
 claculateData.addEventListener('click', event => {
 
 
-  let Expnasese = new Object;
+
   let AmmountOfExpanse = document.getElementsByClassName('ctpp');
   let TitleOfExpanses = document.getElementsByClassName('title');
   let TotalSum =0;
@@ -120,16 +123,23 @@ claculateData.addEventListener('click', event => {
 
         document.getElementsByClassName('insideThis')[0].innerHTML +=`
              <tr>
-          <th scope="row">${++countIt}</th>
-          <td>${TitleOfExpanses[val].value}</td>
-           <td>${AmmountOfExpanse[val].value}</td>
+          <th>${++countIt}</th>
+          <td scope="row">${TitleOfExpanses[val].value}</td>
+           <td scope="row">${AmmountOfExpanse[val].value}</td>
      
             </tr>
 
         
         `
-      TotalSum += parseFloat(AmmountOfExpanse[val].value)
-        
+      TotalSum += parseFloat(AmmountOfExpanse[val].value);
+
+      //saving all the data in the object  and this will send to the database
+      
+    
+    
+     //adding the data in the array
+      Expnasese.data[val]= {  title : TitleOfExpanses[val].value , ammount :parseFloat(AmmountOfExpanse[val].value)}
+
 
       }
 
@@ -139,6 +149,38 @@ claculateData.addEventListener('click', event => {
   }
 
 
-  console.log(TotalSum);
+  Expnasese.date = TodayDate.getDate()+ '/'+TodayDate.getMonth()+'/'+'/'+TodayDate.getUTCFullYear()
+  Expnasese.totalItme = countIt;
+  Expnasese.totalAmmount = TotalSum;
+
+  document.getElementsByClassName('insideThis')[0].innerHTML += `
+  <tr>
+  <th scope="row"><span class="n" style="font-family:new;"> Total Item </span>: ${countIt}</th>
+ 
+   <th colspan="2"><span class="n" style="font-family : new;">Total Ammount</span> : ${TotalSum}</th>
+
+    </tr>
+  `
+
+
+    if(TotalSum != 0)
+    {
+      document.getElementsByClassName('saveDBS')[0].style.display = "flex"
+    }
+
+    ///now we will send the data to our server
+
+
+  
+
+})
+
+
+document.getElementsByClassName('sendData')[0].addEventListener('click',(event)=>{
+
+  console.log(Expnasese);
+
+  
+
 
 })

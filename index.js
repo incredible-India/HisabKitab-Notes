@@ -1,10 +1,11 @@
-/*This project is for the calculations of Expens and making Notes 
+/*This project is for the calculations of Expenses and making Notes 
 Himanshu Kumar Sharma B.E 3rd Sem 
 DOM : 27/02/2021 */
 
 //requiring the important modules 
 require('dotenv').config(); //dot env for reading the data from it
 const express = require('express'); //for the creating router
+const app = express();
 const chalk = require('chalk'); //beautify the console window of terminal
 const path = require('path'); // for the path files or folders
 const morgan = require('morgan'); //for the debugging 
@@ -19,14 +20,13 @@ const cookieParser = require('cookie-parser'); //for the cookies
 const pug = require('pug'); //templates engine..
 const userauth = require('./authentication/auth'); //user authentication 
 const user = require('./model/user');
-const {
-    findOne
-} = require('./model/user');
-// const { info } = require('console');
+const webSocket = require('ws');//webSocket
+const http = require('http').createServer(app);//http module
 
 
-//creating server
-const app = express();
+
+
+
 
 
 //giving the port number
@@ -328,9 +328,29 @@ app.get('/myexpanses',userauth,async (req,res)=>{
 
     }else
     {
-        return res.status(200).redirect('/signin'); //is user is not aurthorised
+        return res.status(200).redirect('/signin'); //if user is not aurthorised
     }
 
+
+})
+
+
+app.get('/myexpanses/saverecords',userauth,async(req, res)=>{
+
+    let rightUser = await  req.isAurthised;
+
+    if(rightUser)
+    {
+
+        //event for the webSocket
+
+   
+
+
+    }else
+    {
+        return res.status(200).redirect('/signin'); //if user is not aurthorised
+    }
 
 })
 

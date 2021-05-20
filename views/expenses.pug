@@ -63,7 +63,7 @@ html(lang="en")
                 |xpenses Managment 
 
         //- this will show only current *date 
-
+        
         .container.dateinfo 
 
         //- all the input box for data entry will shown here 
@@ -71,7 +71,7 @@ html(lang="en")
             .container.inputgrps
                 .container.inputbox 
                     .input-group.mb-3
-                        input.form-control#title0(type='text' placeholder='Title of Expenses' aria-label='Username')
+                        input.form-control#title0.title(type='text' placeholder='Title of Expenses' aria-label='Username')
                         span.input-group-text ₹
                         input.form-control.ctpp(type='number' placeholder='Ammount' aria-label='Server')
 
@@ -84,6 +84,18 @@ html(lang="en")
                 button.btn.btn-success.calData Calculate
                 button.btn.btn-primary(type='button' data-bs-toggle='modal' data-bs-target='#exampleModal')
                     | Calculator
+
+
+        .container.tableData
+            table.table.table-bordered.table-dark
+                thead 
+                    tr 
+                        th(scope="col") S.I 
+                        th(scope="col") Title
+                        th(scope="col") Ammount
+                tbody.insideThis 
+                 
+            
 
         
 

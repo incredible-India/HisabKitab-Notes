@@ -1,3 +1,5 @@
+
+
 let date = new Date()
 
 document.getElementsByClassName('dateinfo')[0].innerHTML = `<h3 style="text-align: right;">
@@ -33,7 +35,7 @@ AddoneButton.addEventListener('click', (event) => {
 
   newDiv.innerHTML += `<div class="container inputbox">
 <div class="input-group mb-3 remove${i++}">
-<input type="text" class="form-control" placeholder="Title of Expenses" aria-label="Title of Expenses" id="title${i}" >
+<input type="text" class="form-control title" placeholder="Title of Expenses" aria-label="Title of Expenses" id="title${i}" >
 <span class="input-group-text remove${i} rmv"> - </span>
 <input type="number" class="form-control ctpp" placeholder="Ammount" aria-label="Server">
 </div>
@@ -92,15 +94,51 @@ claculateData.addEventListener('click', event => {
 
 
   let Expnasese = new Object;
+  let AmmountOfExpanse = document.getElementsByClassName('ctpp');
+  let TitleOfExpanses = document.getElementsByClassName('title');
+  let TotalSum =0;
+  let countIt =0; //in the table it is the serial number
 
+
+  document.getElementsByClassName('insideThis')[0].innerHTML = ""
   for (let val = 0; val < document.getElementsByClassName('ctpp').length; val++) {
 
-    console.log( document.getElementsByClassName('ctpp')[val].value);
+   
+    if(!(AmmountOfExpanse[val].value == "" && TitleOfExpanses[val].value == ""))
+    {
+
+      if(AmmountOfExpanse[val].value == "")
+      {
+        AmmountOfExpanse[val].value = 0;
+      }
+      if(TitleOfExpanses[val].value == "")
+      {
+        TitleOfExpanses[val].value = "Unknown"
+      } 
+     
+        //now we will make the table And fill the data
+
+        document.getElementsByClassName('insideThis')[0].innerHTML +=`
+             <tr>
+          <th scope="row">${++countIt}</th>
+          <td>${TitleOfExpanses[val].value}</td>
+           <td>${AmmountOfExpanse[val].value}</td>
+     
+            </tr>
+
+        
+        `
+      TotalSum += parseFloat(AmmountOfExpanse[val].value)
+        
+
+      }
+
+ 
 
 
   }
 
 
-
+  console.log(TotalSum);
 
 })

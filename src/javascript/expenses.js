@@ -1,8 +1,9 @@
 
-
 let TodayDate = new Date()
 var Expnasese = new Object;
 Expnasese.data = new Array;
+
+
 
 
 document.getElementsByClassName('dateinfo')[0].innerHTML = `<h3 style="text-align: right;">
@@ -162,7 +163,7 @@ claculateData.addEventListener('click', event => {
     </tr>
   `
 
-
+           
     if(TotalSum != 0)
     {
       document.getElementsByClassName('saveDBS')[0].style.display = "flex"
@@ -178,7 +179,48 @@ claculateData.addEventListener('click', event => {
 
 document.getElementsByClassName('sendData')[0].addEventListener('click',(event)=>{
 
-  console.log(Expnasese);
+
+try {
+
+  if("WebSocket" in window)
+  {
+
+    let ws = io('http://localhost:80'); //first we connect to the server 
+    try {
+      ws.emit('data',JSON.stringify({'expens':Expnasese,status :true}));//sending the data to the server
+     
+    } catch (error) {
+      alert('We could not send the data')
+    }
+   
+    ws.on('disconnect',()=>{
+      alert('Server is Crashed with unexpected error');
+    })
+
+    ws.on('closeit',type=>{ //after receiving the data from client side ,server will send the response
+      if(type)
+      {
+        location.href='/myexpanses/saverecords';
+      }else
+      {
+        alert('Server responded with 403')
+      }
+    })
+
+
+    
+  }
+
+  
+  
+} catch (error) {
+
+  alert(error)
+
+
+}
+
+  
 
   
 

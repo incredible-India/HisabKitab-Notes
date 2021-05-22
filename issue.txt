@@ -1,2 +1,1 @@
-+ add click event desabled 
-for the new code insertion on that 
+web socket connection on differen pages weite in the notes

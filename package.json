@@ -24,9 +24,11 @@
     "express": "^4.17.1",
     "express-validator": "^6.10.0",
     "jsonwebtoken": "^8.5.1",
+    "localstorage": "^1.0.1",
     "mongoose": "^5.12.10",
     "morgan": "^1.10.0",
     "pug": "^3.0.2",
+    "socket.io": "^4.1.2",
     "ws": "^7.4.5"
   }
 }

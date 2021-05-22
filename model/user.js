@@ -31,7 +31,12 @@ let schema =mongoose.Schema ;
     ,  tokenSchema : [{tokendbs:{
         type:String,
         required:true
-    }}]
+    }}],
+
+    expanses :{
+        type : Object
+
+    }
 })
 
 

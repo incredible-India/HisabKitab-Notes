@@ -10,7 +10,7 @@ const chalk = require('chalk'); //beautify the console window of terminal
 const path = require('path'); // for the path files or folders
 const morgan = require('morgan'); //for the debugging 
 require('./database/dbsCon'); //for the conncetion of database
-const bodyParser = require('body-parser'); //for the parsing data from the url
+// const bodyParser = require('body-parser'); //for the parsing data from the url
 const {
     check,
     validationResult
@@ -20,11 +20,12 @@ const cookieParser = require('cookie-parser'); //for the cookies
 const pug = require('pug'); //templates engine..
 const userauth = require('./authentication/auth'); //user authentication 
 const user = require('./model/user');
-const webSocket = require('ws');//webSocket
-const http = require('http').createServer(app);//http module
-
-
-
+const http = require('http').createServer(app); //creating http conncetion
+const io = require('socket.io')(http,{
+    cors:{ //to avoiding the cors error
+        "origin": "*"
+    }
+});//web socket module
 
 
 
@@ -40,8 +41,8 @@ app.set('views', path.join(__dirname, "./views/"))
 //using the middleware
 app.use(express.static(path.join('./src'))) //tells about the satics files
 app.use(morgan('dev')); //for the debugging
-app.use(bodyParser.json()); //for parsing data in json formate
-app.use(bodyParser.urlencoded({
+app.use(express.json()); //for parsing data in json formate
+app.use(express.urlencoded({
     extended: false
 }));
 app.use(cookieParser()); //cookies middleware
@@ -320,11 +321,47 @@ app.get('/myexpanses',userauth,async (req,res)=>{
 
     let user  = await req.isAurthised;
 
+
+    
+    
     if(user)
     {
+
+        io.on('connection',socket=>{ //first we connect to our client
+            console.log(chalk.redBright(("we are connectes to from webSocket")));
+            
+            socket.on('data',ClientData=>{ //client will send the info of expanses
+      
+
+                if(JSON.parse(ClientData).status)//we will parse that data
+                {
+                    try {
+                        user.expanses = JSON.parse(ClientData).expens; //saving the data in DBS
+                 
+                        user.save();
+                        console.log(chalk.cyanBright("saved Info in DBS"));
+                        socket.emit('closeit',true)
+
+                    } catch (error) {
+                        console.log("could not save in dbs");
+                    }
+                   
+                }else
+                {
+                    throw new Error;
+                }
+                
+               
+            })
+
+          ;
+        })
+
         return res.render('expenses',{
             allinfo : user
         })
+
+    
 
     }else
     {
@@ -342,9 +379,10 @@ app.get('/myexpanses/saverecords',userauth,async(req, res)=>{
     if(rightUser)
     {
 
+
         //event for the webSocket
 
-   
+        return res.send(rightUser.expanses)
 
 
     }else
@@ -354,7 +392,7 @@ app.get('/myexpanses/saverecords',userauth,async(req, res)=>{
 
 })
 
-app.listen(_port, () => {
+http.listen(_port, () => {
 
     console.log(chalk.bgCyanBright.redBright(process.env.SUCCESS_MESSAGE));
 })

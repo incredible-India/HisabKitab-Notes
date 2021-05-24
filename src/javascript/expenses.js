@@ -153,6 +153,10 @@ claculateData.addEventListener('click', event => {
   Expnasese.date = TodayDate.getDate()+ '/'+TodayDate.getMonth()+'/'+'/'+TodayDate.getUTCFullYear()
   Expnasese.totalItme = countIt;
   Expnasese.totalAmmount = TotalSum;
+  Expnasese.dd = TodayDate.getDate();
+  Expnasese.mm =TodayDate.getMonth();
+  Expnasese.yy =TodayDate.getUTCFullYear();
+
 
   document.getElementsByClassName('insideThis')[0].innerHTML += `
   <tr>
@@ -200,7 +204,7 @@ try {
     ws.on('closeit',type=>{ //after receiving the data from client side ,server will send the response
       if(type)
       {
-        location.href='/myexpanses/saverecords';
+        location.href='/myexpanses/RecordToday/';
       }else
       {
         alert('Server responded with 403')

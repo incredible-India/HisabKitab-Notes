@@ -21,11 +21,11 @@ const pug = require('pug'); //templates engine..
 const userauth = require('./authentication/auth'); //user authentication 
 const user = require('./model/user');
 const http = require('http').createServer(app); //creating http conncetion
-const io = require('socket.io')(http,{
-    cors:{ //to avoiding the cors error
+const io = require('socket.io')(http, {
+    cors: { //to avoiding the cors error
         "origin": "*"
     }
-});//web socket module
+}); //web socket module
 
 
 
@@ -298,15 +298,13 @@ app.get('/delete/All', userauth, async (req, res) => {
 
     let _user = await req.isAurthised;
 
-    if(_user)
-    {
-            _user.notes = []
-            _user.save();
-            
-            return res.redirect('/mynotes');
+    if (_user) {
+        _user.notes = []
+        _user.save();
 
-    }else
-    {
+        return res.redirect('/mynotes');
+
+    } else {
         return res.status(200).redirect('/signin'); //is user is not aurthorised
     }
 
@@ -317,54 +315,51 @@ app.get('/delete/All', userauth, async (req, res) => {
 
 //simple router
 
-app.get('/myexpanses',userauth,async (req,res)=>{
+app.get('/myexpanses', userauth, async (req, res) => {
 
-    let user  = await req.isAurthised;
+    let user = await req.isAurthised;
 
 
-    
-    
-    if(user)
-    {
 
-        io.on('connection',socket=>{ //first we connect to our client
+
+    if (user) {
+
+        io.on('connection', socket => { //first we connect to our client
             console.log(chalk.redBright(("we are connectes to from webSocket")));
-            
-            socket.on('data',ClientData=>{ //client will send the info of expanses
-      
 
-                if(JSON.parse(ClientData).status)//we will parse that data
+            socket.on('data', ClientData => { //client will send the info of expanses
+
+
+                if (JSON.parse(ClientData).status) //we will parse that data
                 {
                     try {
                         user.expanses = JSON.parse(ClientData).expens; //saving the data in DBS
-                 
+
                         user.save();
                         console.log(chalk.cyanBright("saved Info in DBS"));
-                        socket.emit('closeit',true)
+                        socket.emit('closeit', true)
 
                     } catch (error) {
                         console.log("could not save in dbs");
                     }
-                   
-                }else
-                {
+
+                } else {
                     throw new Error;
                 }
-                
-               
+
+
             })
 
-          ;
+            ;
         })
 
-        return res.render('expenses',{
-            allinfo : user
+        return res.render('expenses', {
+            allinfo: user
         })
 
-    
 
-    }else
-    {
+
+    } else {
         return res.status(200).redirect('/signin'); //if user is not aurthorised
     }
 
@@ -372,22 +367,63 @@ app.get('/myexpanses',userauth,async (req,res)=>{
 })
 
 
-app.get('/myexpanses/saverecords',userauth,async(req, res)=>{
+app.get('/myexpanses/saverecords/:__ApiKey', userauth, async (req, res) => {
 
-    let rightUser = await  req.isAurthised;
+    let rightUser = await req.isAurthised;
 
-    if(rightUser)
+    let _APIKEY = process.env.API;
+
+    let apiFromURL = req.params.__ApiKey;
+  
+    if (rightUser) {  //uaerAUTH
+
+        if (_APIKEY == apiFromURL) {//this will check apikey
+
+            if (Object.keys(rightUser.expanses).length == 0) { //if user deleted the records or does not save it..
+                return res.status(200).json({
+                    status: 'false',
+                    message: "no records found"
+                })
+
+            } else {
+
+                return res.send(rightUser.expanses);
+
+            }
+        } else { //if apikey does not matched
+
+            return res.status(404).json({
+                status: "false",
+                message: "incorrect apikey"
+            });
+
+
+
+        }
+
+
+    } else {
+        return res.status(200).redirect('/signin'); //if user is not aurthorised
+    }
+
+})
+
+
+app.get('/myexpanses/RecordToday/', userauth, async (req, res) => {
+
+    let userAuth = await req.isAurthised;
+
+    if(userAuth)
     {
 
-
-        //event for the webSocket
-
-        return res.send(rightUser.expanses)
+        return res.status(200).render('dataPreview',{
+            allinfo: userAuth
+        })
 
 
     }else
     {
-        return res.status(200).redirect('/signin'); //if user is not aurthorised
+        return res.status(200).redirect('/signin');
     }
 
 })

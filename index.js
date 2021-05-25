@@ -416,7 +416,7 @@ app.get('/myexpanses/RecordToday/', userauth, async (req, res) => {
     if(userAuth)
     {
 
-        return res.status(200).render('dataPreview',{
+        return res.status(200).render('today',{
             allinfo: userAuth
         })
 

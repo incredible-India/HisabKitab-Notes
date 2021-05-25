@@ -1,0 +1,32 @@
+.charts{
+    display:flex;
+    justify-self: center;
+    align-items: center;
+}
+
+@font-face {
+
+    src :url('/../fonts/new.ttf');
+    font-family: new;
+}
+
+.n {
+    color: red;
+    font-family: new;
+}
+
+
+.tabledata{
+
+    display: flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+}
+
+.mahak{
+    display: flex;
+    justify-content:space-around;
+    align-items:center;
+    /* flex-direction: row; */
+}

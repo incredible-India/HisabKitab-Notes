@@ -7,8 +7,14 @@ html(lang="en")
         title Hishab_Kitab Notes
         link(href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl' crossorigin='anonymous')
         script(src='https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js' integrity='sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0' crossorigin='anonymous')
+        script(src="https://cdn.jsdelivr.net/npm/chart.js")
         style 
             include ./../src/css/index.css
+        style 
+            include ./../src/css/today.css
+        
+        
+        
     body
         .mainheadin.container
             h1.heading
@@ -49,4 +55,40 @@ html(lang="en")
                                         a.dropdown-item(href='/logout')
                                             i.fas.fa-user-plus
                                             | Logout
+        
+
+        .charts.container 
+            canvas#myChart(width= '350px' height='350px')
+        
+        .tabledata.container
+            .mahak 
+                h3
+                    span.n T
+                    |otal 
+                    span.n I
+                    |tem
+
+                h3  
+                    span.n A
+                    |mmount
+            table.table 
+                thead
+                    tr 
+                        th(scope="col")
+                            span.n S
+                            |.I
+                        th(scope="col")
+                            span.n T
+                            |itle 
+                        th(scope="col")
+                            span.n A
+                            |mmount
+                tbody 
+                            
+
+           
+    
+
+    script
+        include ./../src/javascript/today.js
         

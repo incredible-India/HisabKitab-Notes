@@ -4,6 +4,19 @@
     align-items: center;
 }
 
+canvas{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#myChart{
+    width: 100%;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+
 @font-face {
 
     src :url('/../fonts/new.ttf');
@@ -15,6 +28,19 @@
     font-family: new;
 }
 
+.item  {
+    color:red;
+    font-family: new;
+}
+.ammount{
+    color:red;
+    font-family: new;
+}
+h3{
+    letter-spacing:3px
+    margin10px
+}
+
 
 .tabledata{
 
@@ -22,11 +48,23 @@
     justify-content:center;
     align-items:center;
     flex-direction:column;
+  
 }
 
 .mahak{
     display: flex;
     justify-content:space-around;
     align-items:center;
-    /* flex-direction: row; */
+    background-color: black;
+    color:white;
+    position: sticky;
+    top: 50px;
+    z-index: 99;
+}
+
+.but{
+    display: flex;
+    justify-content:center;
+    align-items:center;
+    
 }

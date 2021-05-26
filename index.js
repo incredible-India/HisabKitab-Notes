@@ -332,16 +332,58 @@ app.get('/myexpanses', userauth, async (req, res) => {
 
                 if (JSON.parse(ClientData).status) //we will parse that data
                 {
-                    try {
+                    // try {
                         user.expanses = JSON.parse(ClientData).expens; //saving the data in DBS
+                     
+                        // user.save();
+                        // user.allreocrds = user.allreocrds.map(e=>e.find(a=> ((a.dd == user.expanses.dd && a.mm == user.expanses.mm && a.yy == user.expanses.yy)|| user.expanses))
+                        //this code can be done in sigle line also
+                    if(user.allreocrds.length != 0)
+                    {      console.log("jk");
+                        for(i in user.allreocrds)
+                        {
+                            console.log('1s');
+                            if(user.allreocrds[i].dd == user.expanses.dd)
+                            {  console.log('2s');
+                                if(user.allreocrds[i].mm == user.expanses.mm)
+                                {  console.log('3s');
+                                    if(user.allreocrds[i].yy == user.expanses.yy)
+                                    {  console.log('4s');
+                                        console.log(user.expanses)
+                                     
+                                        user.allreocrds[i] = user.expanses;
+                                    }else
+                                    {  console.log('1es');
+                                        user.allreocrds = user.allreocrds.concat(user.expanses)
+                                    }
+                                }else{  console.log('2es');
+                                    user.allreocrds = user.allreocrds.concat(user.expanses)
+                                }
+                            }else
+                            {  console.log('3es');
+                                user.allreocrds = user.allreocrds.concat(user.expanses)
+                            }
+                        }
+                    }else
+                    {
+                        console.log("jkif");
+                        user.allreocrds = user.allreocrds.concat(user.expanses)
+                    }
+
+
 
                         user.save();
+                        temList =null;
+
+
+
+
                         console.log(chalk.cyanBright("saved Info in DBS"));
                         socket.emit('closeit', true)
 
-                    } catch (error) {
-                        console.log("could not save in dbs");
-                    }
+                    // } catch (error) {
+                    //     console.log("could not save in dbs");
+                    // }
 
                 } else {
                     throw new Error;

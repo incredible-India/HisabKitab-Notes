@@ -37,6 +37,10 @@ let schema =mongoose.Schema ;
         type : Object
 
     }
+,
+    allreocrds:{
+        type : Array
+    }
 })
 
 

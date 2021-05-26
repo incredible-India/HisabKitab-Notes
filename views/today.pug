@@ -50,7 +50,7 @@ html(lang="en")
                                     li
                                         a.dropdown-item(href='/')
                                             i.fas.fa-key
-                                            | Extra
+                                            | All Records
                                     li
                                         a.dropdown-item(href='/logout')
                                             i.fas.fa-user-plus
@@ -58,19 +58,24 @@ html(lang="en")
         
 
         .charts.container 
-            canvas#myChart(width= '350px' height='350px')
+            canvas#myChart(width= '400px' height='350px')
         
         .tabledata.container
-            .mahak 
+            .mahak.container
                 h3
                     span.n T
-                    |otal 
-                    span.n I
+                    |otal
+                     
+                    span.n  I
                     |tem
+                    span.item
 
-                h3  
+                h3 
+                    span.n T
+                    |otal 
                     span.n A
                     |mmount
+                    span.ammount
             table.table 
                 thead
                     tr 
@@ -83,11 +88,13 @@ html(lang="en")
                         th(scope="col")
                             span.n A
                             |mmount
-                tbody 
+                tbody.inside 
                             
 
            
     
+        .container.but 
+            a.btn.btn-primary All Records
 
     script
         include ./../src/javascript/today.js

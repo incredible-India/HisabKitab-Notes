@@ -27,7 +27,7 @@ html(lang="en")
                             li.nav-item
                                 a.nav-link(href='/myexpanses')
                                     i.fas.fa-inr
-                                    | My Expenses
+                                    | New Expenses
                             li.nav-item
                             a.nav-link(href='/mynotes')
                                 i.fas.fa-sticky-note
@@ -42,9 +42,12 @@ html(lang="en")
                                     | #{allinfo.name}
                                 ul.dropdown-menu(aria-labelledby='navbarDropdownMenuLink')
                                     li
+                                        a.dropdown-item(href='/mynotes')
+                                            i.fas.fa-key
+                                            | My Notes
                                         a.dropdown-item(href='/')
                                             i.fas.fa-key
-                                            | Extra
+                                            | My Expanses
                                     li
                                         a.dropdown-item(href='/logout')
                                             i.fas.fa-user-plus

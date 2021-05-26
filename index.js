@@ -335,9 +335,16 @@ app.get('/myexpanses', userauth, async (req, res) => {
                     // try {
                         user.expanses = JSON.parse(ClientData).expens; //saving the data in DBS
                      
+
+                    
+
+
+                       H= user.allreocrds.find(e => (e.dd == user.expanses && e.mm == user.expanses && e.yy == user.expanses) || user.expanses)
+                      console.log(H);
+
+
                         // user.save();
-                        // user.allreocrds = user.allreocrds.map(e=>e.find(a=> ((a.dd == user.expanses.dd && a.mm == user.expanses.mm && a.yy == user.expanses.yy)|| user.expanses))
-                        //this code can be done in sigle line also
+                        
                     if(user.allreocrds.length != 0)
                     {      console.log("jk");
                         for(i in user.allreocrds)
@@ -351,7 +358,7 @@ app.get('/myexpanses', userauth, async (req, res) => {
                                     {  console.log('4s');
                                         console.log(user.expanses)
                                      
-                                        user.allreocrds[i] = user.expanses;
+                                         user.allreocrds.splice(i,1,user.expanses);
                                     }else
                                     {  console.log('1es');
                                         user.allreocrds = user.allreocrds.concat(user.expanses)
@@ -373,7 +380,7 @@ app.get('/myexpanses', userauth, async (req, res) => {
 
 
                         user.save();
-                        temList =null;
+                
 
 
 

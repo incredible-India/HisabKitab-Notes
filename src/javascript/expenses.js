@@ -150,7 +150,7 @@ claculateData.addEventListener('click', event => {
   }
 
 
-  Expnasese.date = TodayDate.getDate()+ '/'+TodayDate.getMonth()+'/'+'/'+TodayDate.getUTCFullYear()
+  Expnasese.date = TodayDate.getDate()+ '/'+TodayDate.getMonth()+'/'+TodayDate.getUTCFullYear()
   Expnasese.totalItme = countIt;
   Expnasese.totalAmmount = TotalSum;
   Expnasese.dd = TodayDate.getDate();
@@ -198,7 +198,7 @@ try {
     }
    
     ws.on('disconnect',()=>{
-      alert('Server is Crashed with unexpected error');
+      alert('Server Crashed with unexpected error');
     })
 
     ws.on('closeit',type=>{ //after receiving the data from client side ,server will send the response

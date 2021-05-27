@@ -339,8 +339,8 @@ app.get('/myexpanses', userauth, async (req, res) => {
                     
 
 
-                       H= user.allreocrds.find(e => (e.dd == user.expanses && e.mm == user.expanses && e.yy == user.expanses) || user.expanses)
-                      console.log(H);
+                    //    H= user.allreocrds.find(e => (e.dd == user.expanses && e.mm == user.expanses && e.yy == user.expanses) || user.expanses)
+                      user.allreocrds.splice(user.allreocrds.find(e =>(e.dd == user.expanses && e.mm == user.expanses && e.yy == user.expanses) || user.expanses))
 
 
                         // user.save();
@@ -358,7 +358,8 @@ app.get('/myexpanses', userauth, async (req, res) => {
                                     {  console.log('4s');
                                         console.log(user.expanses)
                                      
-                                         user.allreocrds.splice(i,1,user.expanses);
+                                        user.allreocrds[i] = user.expanses;
+                                         
                                     }else
                                     {  console.log('1es');
                                         user.allreocrds = user.allreocrds.concat(user.expanses)

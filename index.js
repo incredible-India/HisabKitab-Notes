@@ -334,49 +334,60 @@ app.get('/myexpanses', userauth, async (req, res) => {
                 {
                     // try {
                         user.expanses = JSON.parse(ClientData).expens; //saving the data in DBS
-                     
+                     let indexData =user.allreocrds.findIndex(e => (e.dd == user.expanses.dd && e.mm == user.expanses.mm && e.yy == user.expanses.yy));
 
-                    
+                     if(indexData > 0)
+                     {
+                        user.allreocrds.splice(indexData, 2)
+                     }
+                      else
+                      {
+                          console.log("hrllo");
+                      }
 
+
+           
+              
 
                     //    H= user.allreocrds.find(e => (e.dd == user.expanses && e.mm == user.expanses && e.yy == user.expanses) || user.expanses)
-                      user.allreocrds.splice(user.allreocrds.find(e =>(e.dd == user.expanses && e.mm == user.expanses && e.yy == user.expanses) || user.expanses))
-
+                    //   user.allreocrds.splice(user.allreocrds.find(e =>(e.dd == user.expanses && e.mm == user.expanses && e.yy == user.expanses) || user.expanses))
+                      
 
                         // user.save();
                         
-                    if(user.allreocrds.length != 0)
-                    {      console.log("jk");
-                        for(i in user.allreocrds)
-                        {
-                            console.log('1s');
-                            if(user.allreocrds[i].dd == user.expanses.dd)
-                            {  console.log('2s');
-                                if(user.allreocrds[i].mm == user.expanses.mm)
-                                {  console.log('3s');
-                                    if(user.allreocrds[i].yy == user.expanses.yy)
-                                    {  console.log('4s');
-                                        console.log(user.expanses)
+                    // if(user.allreocrds.length != 0)
+                    // {      console.log("jk");
+                    //     for(i in user.allreocrds)
+                    //     {
+                    //         console.log('1s');
+                           
+                    //         if(user.allreocrds[i].dd == user.expanses.dd)
+                    //         {  console.log('2s');
+                    //             if(user.allreocrds[i].mm == user.expanses.mm)
+                    //             {  console.log('3s');
+                    //                 if(user.allreocrds[i].yy == user.expanses.yy)
+                    //                 {  console.log('4s');
+                    //                     console.log(user.expanses)
                                      
-                                        user.allreocrds[i] = user.expanses;
+                    //                    user.allreocrds[i] = user.expanses
                                          
-                                    }else
-                                    {  console.log('1es');
-                                        user.allreocrds = user.allreocrds.concat(user.expanses)
-                                    }
-                                }else{  console.log('2es');
-                                    user.allreocrds = user.allreocrds.concat(user.expanses)
-                                }
-                            }else
-                            {  console.log('3es');
-                                user.allreocrds = user.allreocrds.concat(user.expanses)
-                            }
-                        }
-                    }else
-                    {
-                        console.log("jkif");
-                        user.allreocrds = user.allreocrds.concat(user.expanses)
-                    }
+                    //                 }else
+                    //                 {  console.log('1es');
+                    //                     user.allreocrds = user.allreocrds.concat(user.expanses)
+                    //                 }
+                    //             }else{  console.log('2es');
+                    //                 user.allreocrds = user.allreocrds.concat(user.expanses)
+                    //             }
+                    //         }else
+                    //         {  console.log('3es');
+                    //             user.allreocrds = user.allreocrds.concat(user.expanses)
+                    //         }
+                    //     }
+                    // }else
+                    // {
+                    //     console.log("jkif");
+                    //     user.allreocrds = user.allreocrds.concat(user.expanses)
+                    // }
 
 
 

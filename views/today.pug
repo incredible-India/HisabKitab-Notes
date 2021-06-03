@@ -58,7 +58,15 @@ html(lang="en")
         
 
         .charts.container 
-            canvas#myChart(width= '400px' height='350px')
+            label(for="chartType") Chart Type
+            select.form-control#chartType
+                option(value="bar" default="") Bar
+                option(value="line") line
+                option(value="pie") pie
+                option(value="polarArea") Polar
+            .cft
+                canvas#myChart(width= '400px' height='350px')
+            
         
         .tabledata.container
             .mahak.container

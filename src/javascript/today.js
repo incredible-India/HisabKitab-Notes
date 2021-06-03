@@ -1,16 +1,21 @@
 
 
-var ctx = document.getElementById('myChart').getContext('2d');
 let item = document.getElementsByClassName('item')[0];
 let ammount = document.getElementsByClassName('ammount')[0];
 let tableData = document.getElementsByClassName('inside')[0];
+var dataAmmout = [];
+
+var title =[];
 
 
-
-function chartData(chartType,data,labels,colordata)
+function chartData(chartType,data,labels)
 {
     
- myChart = new Chart(ctx, {
+
+
+    let   ctx = document.getElementById('myChart').getContext('2d');
+
+  myChart = new Chart(ctx, {
     type: chartType,
     data: {
         labels: labels,
@@ -52,11 +57,10 @@ function chartData(chartType,data,labels,colordata)
 fetch('http://localhost:80/myexpanses/saverecords/9bf1sath4bar14a')
 .then(data => data.json())
 .then(final => {
+
     tableData.innerHTML=""
 
-    let dataAmmout = [];
-
-    let title =[];
+   
 
 
 
@@ -88,3 +92,26 @@ fetch('http://localhost:80/myexpanses/saverecords/9bf1sath4bar14a')
     chartData("bar",dataAmmout,title);
 
 })
+
+let chartType = document.getElementsByTagName('select')[0];
+
+chartType.onchange = ()=>{
+
+   
+ Array.from(document.getElementsByTagName('canvas')).forEach(element=>{
+
+     element.remove();
+ })
+
+
+    document.getElementsByClassName('cft')[0].innerHTML =
+
+    `
+    <canvas id="myChart" width="400" height="350"></canvas>
+    
+    `
+
+    chartData(chartType.value,dataAmmout,title);
+
+
+}

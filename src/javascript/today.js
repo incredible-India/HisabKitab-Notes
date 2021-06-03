@@ -60,7 +60,7 @@ fetch('http://localhost:80/myexpanses/saverecords/9bf1sath4bar14a')
 
 
 
-    item.innerText = `->${final.totalItme}`;
+    item.innerText = `->${final.totalItem}`;
 
     ammount.innerText = `->${final.totalAmmount}`
 

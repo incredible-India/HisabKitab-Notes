@@ -38,9 +38,7 @@ let schema =mongoose.Schema ;
 
     }
 ,
-    allreocrds:{
-        type : Array
-    }
+    allrecords:[]
 })
 
 
@@ -66,6 +64,9 @@ users.methods.generateTheToken = function()
 
 
 }
+
+
+
 
 module.exports =mongoose.model('users',users);
  

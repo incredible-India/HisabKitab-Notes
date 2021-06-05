@@ -10,6 +10,7 @@
     <script  defer src="http://localhost:80/socket.io/socket.io.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w==" crossorigin="anonymous" />
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <link rel="stylesheet" href="/../css/index.css">
     <link rel="stylesheet" href="./../css/allRgds.css">
     
@@ -42,7 +43,7 @@
                     <a class="nav-link" href="#"><i class="fas fa-info-circle"></i> About</a>
                   </li>
                   <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle username" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <a class="nav-link dropdown-toggle username " href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                       <i class="fas fa-user-circle"></i> User
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
@@ -57,8 +58,59 @@
           </nav>
     </div>
 
-   
+   <!-- alerterror  -->
+   <div class="alert alert-danger container" role="alert" style="margin-top:10px; display:none">
 
+  </div>
+
+  <!-- //images for not found data -->
+  <div class="container show_hide">
+    <img src="./../images/sad.svg" alt="" class="img-fluid" width="152px" height="150px">
+    <div class="norecords">
+      <h3>
+      <span class="c">S</span>orry <span class="c">N</span>o <span class="c">R</span>ecords  <span class="c">F</span>ound <span class="c">Y</span>et</h3>
+    </div>
+  </div>
+
+  <!-- for the graph and table  -->
+
+<!-- graph -->
+
+<div class="continer">
+  <div id="chart_div" style="width: 400px; height: 120px;" class="container gaouges"></div>
+</div>
+
+  <!-- table  -->
+
+
+<!-- heading forn the data  -->
+
+<div class="show">
+
+<div class="container heading"> <span class="c">L</span>ast <span class="c">O</span>ne <span class="c">W</span>eek  </div>
+
+  <div class="tables container"></div>
+
+  <table class="table container" id="mainTable">
+    <thead class="first_T_HEAD">
+      <!-- <tr>
+
+        <th scope="col"><span class="c">D</span>ate</th>
+        <th scope="col"><span class="c">T</span>otal <span class="c">E</span>xpanses</th>
+        <th scope="col"><span class="c">O</span>ption</th>
+      </tr> -->
+    </thead>
+    <tbody class="first_T_Body">
+      <!-- <tr>
+ 
+        <td>Mark</td>
+        <td>Otto</td>
+        <td>@mdo</td>
+      </tr> -->
+     
+    </tbody>
+  </table>
+</div>
 </body>
 <script src="./../javascript/allRcds.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>

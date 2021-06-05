@@ -2,3 +2,41 @@
     background : black;   
     color: #fff;
 }
+@font-face {
+
+    src :url('/../fonts/new.ttf');
+    font-family: new;
+}
+
+.c {
+    color: red;
+    font-family: new;
+}
+
+
+.tables{
+    overflow-x: auto;
+}
+
+table{
+    overflow-x: auto;
+}
+
+.heading{
+
+    margin-top:10px;
+    margin-bottom:10px;
+    text-align:center;
+    letter-spacing:3px;
+    text-transform: capitalize;
+    
+}
+
+.show_hide{
+
+    display: flex;
+    justify-content:center;
+    align-items:center;
+    margin-top:20px
+
+}

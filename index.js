@@ -408,10 +408,15 @@ app.get('/myexpanses', userauth, async (req, res) => {
 
 
             })
-
+            
             ;
+
+         
+       
         })
 
+
+       
         return res.render('expenses', {
             allinfo: user
         })
@@ -490,7 +495,74 @@ app.get('/myexpanses/RecordToday/', userauth, async (req, res) => {
 
 })
 
+
+
+
+//for the showing all the records routing
+
+app.get('/allrecords',userauth, async (req, res) => {
+
+ let isAurthised = await req.isAurthised;
+
+ if(isAurthised)
+{
+
+
+    //this is the type of the content
+    res.setHeader('Content-Type', 'text/html');
+    res.status(200);
+    res.sendFile(path.join(__dirname,"./src/html/",'allRcds.html'));
+
+
+}else
+{
+    return res.status(200).redirect('/signin');
+
+}
+
+
+})
+//this will send  user Allinfo
+
+app.get('/1bfsde1254854ssedwdffefvg5415ffef/:key/2de5656rdfefefef',userauth, async (req, res) =>{
+
+
+    let dataUser =  await req.isAurthised;//this user auth
+
+    let apiKey =  req.params.key; //api key from the client
+
+    let OriginalKey = process.env.UserApiKey; //original api key from env file
+
+    if(dataUser) //check user auth 
+    {
+        if(apiKey == OriginalKey) //for matching the the main api keys to the client side api keys
+        {
+            res.setHeader('Content-Type', 'application/json');
+            res.status(200).json({status : true , data : dataUser});
+
+        }else
+
+        {
+            res.setHeader('Content-Type', 'application/json');
+            res.status(200).json({status : false});
+        }
+        
+    }else
+    {
+        return res.status(200).redirect('/signin');
+    }
+
+
+   
+
+
+})
+
+
 http.listen(_port, () => {
 
     console.log(chalk.bgCyanBright.redBright(process.env.SUCCESS_MESSAGE));
 })
+
+
+/*************************The End*****************************/

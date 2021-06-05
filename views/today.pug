@@ -48,7 +48,7 @@ html(lang="en")
                                     | #{allinfo.name}
                                 ul.dropdown-menu(aria-labelledby='navbarDropdownMenuLink')
                                     li
-                                        a.dropdown-item(href='/')
+                                        a.dropdown-item(href='/allrecords')
                                             i.fas.fa-key
                                             | All Records
                                     li
@@ -102,7 +102,7 @@ html(lang="en")
            
     
         .container.but 
-            a.btn.btn-primary All Records
+            a.btn.btn-primary(href="/allrecords") All Records
 
     script
         include ./../src/javascript/today.js

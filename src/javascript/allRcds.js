@@ -37,6 +37,7 @@ fetchingApi().then(CDATA => {
 
   if (CDATA.status == true) {
 
+  
     //showing the username form the database 
     username.innerText = CDATA.data.name;
 
@@ -61,12 +62,13 @@ fetchingApi().then(CDATA => {
     } else if (lengthOfTotalRecords > 8) {
 
 
-     l= Countit(CDATA,lengthOfTotalRecords);
-     console.log(l);
+     Countit(CDATA,lengthOfTotalRecords);
+     
 
       
       showTable.style.display = "block";//hiding the table
       NoRcds.style.display = "none";//showing the image
+    
       for (let i = 1; i < 8; i++) {
 
         //inserting the data in the table
@@ -77,7 +79,7 @@ fetchingApi().then(CDATA => {
             <th scope="col"><span class="c">D</span>ate</th>
             <th scope="col"><span class="c">T</span>otal <span class="c">E</span>xpanses</th>
             <th scope="col"><span class="c">I</span>tems</th>
-            <th scope="col"><span class="c">O</span>ption</th>
+            <th scope="col"><span class="c">O</span>ptions</th>
           </tr>
         </thead>   
             
@@ -87,22 +89,25 @@ fetchingApi().then(CDATA => {
             
             <tr>
      
-            <td>${CDATA.data.allrecords[(lengthOfTotalRecords)-i].date}</td>
-            <td>${CDATA.data.allrecords[(lengthOfTotalRecords)-i].totalAmmount}</td>
-            <td>${CDATA.data.allrecords[(lengthOfTotalRecords)-i].totalItem}</td>
-            <td> OPTIONS </td>
+            <th>${CDATA.data.allrecords[(lengthOfTotalRecords)-i].date}</th>
+            <th>${CDATA.data.allrecords[(lengthOfTotalRecords)-i].totalAmmount}</th>
+            <th>${CDATA.data.allrecords[(lengthOfTotalRecords)-i].totalItem}</th>
+            <th><a href="/myexpanses/read/${CDATA.data.allrecords[i].date}">View</a> / <a href="myexpanses/edit/${CDATA.data.allrecords[i].date}">Edit</a> / <a href="myexpanses/delete/${CDATA.data.allrecords[i].date}">Delete</a></th>
           </tr>
             
             `
+        
 
 
       }
+  
 
+   
 
     } else {
 
-      l= Countit(CDATA,lengthOfTotalRecords);
-      console.log(l);
+      Countit(CDATA,lengthOfTotalRecords);
+    
       showTable.style.display = "block";//hiding the table
       NoRcds.style.display = "none";//showing the image
       for (let i = (lengthOfTotalRecords - 1); i >= 0; i--) {
@@ -117,7 +122,7 @@ fetchingApi().then(CDATA => {
             <th scope="col"><span class="c">D</span>ate</th>
             <th scope="col"><span class="c">T</span>otal <span class="c">E</span>xpanses</th>
             <th scope="col"><span class="c">I</span>tems</th>
-            <th scope="col"><span class="c">O</span>ption</th>
+            <th scope="col"><span class="c">O</span>ptions</th>
           </tr>
         </thead>   
             
@@ -130,7 +135,7 @@ fetchingApi().then(CDATA => {
             <th>${CDATA.data.allrecords[i].date}</th>
             <th>${CDATA.data.allrecords[i].totalAmmount}</th>
             <th>${CDATA.data.allrecords[i].totalItem}</th>
-            <th> OPTIONS </th>
+            <th><a href="myexpanses/read/${CDATA.data.allrecords[i].date}">View</a> / <a href="myexpanses/edit/${CDATA.data.allrecords[i].date}">Edit</a> / <a href="myexpanses/delete/${CDATA.data.allrecords[i].date}">Delete</a> </th>
           </tr>
             
             `
@@ -159,7 +164,7 @@ fetchingApi().catch(error => {
 
 //this is the graph for showing the last weeak data
 
-function showGRAPH(dataOffer,dataArray,YY,MM,WW,DD) {{
+function showGRAPH(dataArray,DD) {{
   
 google.charts.load('current', {'packages':['gauge']});
 google.charts.setOnLoadCallback(drawChart);
@@ -169,13 +174,14 @@ function drawChart() {
   var data = google.visualization.arrayToDataTable(dataArray);
 
   var options = {
-    
-    width: 400, height: 120,
-    max : 10000,min : 0,
-    greenFrom : 500, greenTo : 1000,
-    redFrom: 1000, redTo: 5000,
-    yellowFrom:5000, yellowTo: 10000,
+
+    width: 400, height: 220,
+    max : 2000,min : 0,
+    greenFrom : 150, greenTo : 950,
+    redFrom: 950, redTo: 1500,
+    yellowFrom:1500, yellowTo: 2000,
     minorTicks: 5
+   
   };
 
 
@@ -187,20 +193,109 @@ function drawChart() {
     data.setValue(0, 1, DD);
     chart.draw(data, options);
 
-
-    data.setValue(1, 1, WW);
-    chart.draw(data, options);
-
-
-    data.setValue(2, 1, MM);
-    chart.draw(data, options);
-
-    data.setValue(2, 1, YY);
-    chart.draw(data, options);
-
 }
 }}
 
+//for the weekly chart
+function showGRAPHWW(dataArray,WW) {{
+  
+  google.charts.load('current', {'packages':['gauge']});
+  google.charts.setOnLoadCallback(drawChart);
+  
+  function drawChart() {
+  
+    var data = google.visualization.arrayToDataTable(dataArray);
+  
+    var options = {
+      
+      width: 400, height: 220,
+      max : 8000,min : 0,
+      greenFrom : 1500, greenTo : 3500,
+      redFrom: 3500, redTo: 5500,
+      yellowFrom:5500, yellowTo: 8000,
+      minorTicks: 5
+    };
+  
+  
+    var chart = new google.visualization.Gauge(document.getElementById('chart_div_WW'));
+  
+    // chart.draw(data, options);
+  
+  
+      data.setValue(0, 1, WW);
+      chart.draw(data, options);
+  
+  }
+  }}
+
+
+  //for the monthly
+
+function showGRAPHMM(dataArray,MM ){{
+  
+  google.charts.load('current', {'packages':['gauge']});
+  google.charts.setOnLoadCallback(drawChart);
+  
+  function drawChart() {
+  
+    var data = google.visualization.arrayToDataTable(dataArray);
+  
+    var options = {
+      
+      width: 400, height: 220,
+      max : 30000,min : 0,
+      greenFrom : 2000, greenTo : 8000,
+      redFrom: 8000, redTo: 15000,
+      yellowFrom:15000, yellowTo: 30000,
+      minorTicks: 5
+    };
+  
+  
+    var chart = new google.visualization.Gauge(document.getElementById('chart_div_MM'));
+  
+    // chart.draw(data, options);
+  
+  
+      data.setValue(0, 1, MM);
+      chart.draw(data, options);
+  
+  }
+  }}
+//for the yearly chart
+function showGRAPHYY(dataArray,YY ){{
+  
+  google.charts.load('current', {'packages':['gauge']});
+  google.charts.setOnLoadCallback(drawChart);
+  
+  function drawChart() {
+  
+    var data = google.visualization.arrayToDataTable(dataArray);
+  
+    var options = {
+      
+      width: 400, height: 220,
+      max : 200000,min : 0,
+      greenFrom : 50000, greenTo : 100000,
+      redFrom: 100000, redTo: 150000,
+      yellowFrom:150000, yellowTo: 200000,
+      minorTicks: 5
+    };
+  
+  
+    var chart = new google.visualization.Gauge(document.getElementById('chart_div_YY'));
+  
+    // chart.draw(data, options);
+  
+  
+      data.setValue(0, 1, YY);
+      chart.draw(data, options);
+  
+  }
+  }}
+
+
+
+//*******************************************************/
 //function for calculating the total Expanses
 
 function Countit(userDATA,lengthOfDAT){
@@ -241,14 +336,25 @@ for(let i=1; i<=lengthOfDAT ; i++)
 
 }
 
-showGRAPH(1,[['Label', 'Value'],
-['Today', countDD],
-['Weekly', countWW],
-['Monthly', countMM],['Yearly', countYY]])
+showGRAPH([['Label', 'Value'],
+['Today', countDD]
+])
+
+showGRAPHWW([['Label', 'Value'],
+['Weekly', countWW]
+])
+
+showGRAPHMM([['Label', 'Value'],
+['Monthly', countMM]
+])
+
+showGRAPHYY([['Label', 'Value'],
+['Yearly', countYY]
+])
 
 return [countDD,countWW,countMM,countYY];
 
 
 }
 
-// showGRAPH();
+

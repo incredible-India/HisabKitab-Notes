@@ -559,6 +559,35 @@ app.get('/1bfsde1254854ssedwdffefvg5415ffef/:key/2de5656rdfefefef',userauth, asy
 })
 
 
+// for the crud operation 
+app.get('/myexpanses/read/:date',userauth,async (req, res)=>{
+
+    let userAuth = await req.isAurthised;
+
+    if(userAuth)
+    {
+        let RcdsDte = req.params.date;
+
+        let thisRcds =  userAuth.allrecords.filter(e => (e.date == RcdsDte) )
+
+        console.log(RcdsDte,thisRcds);
+       return  res.status(200).json(thisRcds)
+
+    }else
+    {
+
+        return res.status(200).redirect('/signin');
+    }
+
+
+
+
+
+
+})
+
+
+
 http.listen(_port, () => {
 
     console.log(chalk.bgCyanBright.redBright(process.env.SUCCESS_MESSAGE));

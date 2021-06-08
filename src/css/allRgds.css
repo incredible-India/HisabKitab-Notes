@@ -40,3 +40,26 @@ table{
     margin-top:20px
 
 }
+
+.gaouges{
+    display: flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction:row;
+    overflow-x: auto;
+    height:350px;
+ 
+}
+
+.gouge{
+    height:350px;
+    overflow-x:auto;
+    margin-top:15px;
+
+    display: flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction:row;
+
+}
+

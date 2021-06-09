@@ -1,12 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="947c7e4a-9b15-49c9-b62f-cc3013ca0a5f" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/user.js" beforeDir="false" afterPath="$PROJECT_DIR$/model/user.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/javascript/expenses.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/javascript/expenses.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/javascript/today.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/javascript/today.js" afterDir="false" />
-    </list>
+    <list default="true" id="947c7e4a-9b15-49c9-b62f-cc3013ca0a5f" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />

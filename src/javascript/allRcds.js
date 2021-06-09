@@ -1,5 +1,6 @@
 
 
+
 let DarkMode = document.getElementsByClassName('darks')[0]; //for making the webpage in darkmode
 let username = document.getElementsByClassName('username')[0]; //user name in navigation bar
 let errorAlert = document.getElementsByClassName('alert')[0]; //this is the alert box default it is hide
@@ -8,6 +9,8 @@ let firstTable = document.getElementsByClassName('first_T_HEAD')[0]; //inseide t
 let tableBODY = document.getElementsByClassName('first_T_Body')[0]; //inside the table body
 let showTable = document.getElementsByClassName('show')[0]; //table + heading last one week
 let NoRcds = document.getElementsByClassName('show_hide')[0]; //for no records
+let coonetionError = document.getElementsByClassName('coonetionError')[0];//if there will be no inetrnet connection 
+let summary = document.getElementsByClassName('summary')[0];//all the summary of hisab
 // event for the dark and the light mode  
 DarkMode.onclick = function (event) {
   //for making the webpage in darkmode
@@ -92,7 +95,7 @@ fetchingApi().then(CDATA => {
             <th>${CDATA.data.allrecords[(lengthOfTotalRecords)-i].date}</th>
             <th>${CDATA.data.allrecords[(lengthOfTotalRecords)-i].totalAmmount}</th>
             <th>${CDATA.data.allrecords[(lengthOfTotalRecords)-i].totalItem}</th>
-            <th><a href="/myexpanses/read/${CDATA.data.allrecords[i].date}">View</a> / <a href="myexpanses/edit/${CDATA.data.allrecords[i].date}">Edit</a> / <a href="myexpanses/delete/${CDATA.data.allrecords[i].date}">Delete</a></th>
+            <th><a href="/myexpanses/read/${CDATA.data.allrecords[(lengthOfTotalRecords)-i].date}">View</a> / <a href="myexpanses/edit/${CDATA.data.allrecords[(lengthOfTotalRecords)-i].date}">Edit</a> / <a href="myexpanses/delete/${CDATA.data.allrecords[(lengthOfTotalRecords)-i].date}">Delete</a></th>
           </tr>
             
             `
@@ -335,7 +338,10 @@ for(let i=1; i<=lengthOfDAT ; i++)
 
 
 }
+try {
+  
 
+  coonetionError.style.display = "none";
 showGRAPH([['Label', 'Value'],
 ['Today', countDD]
 ])
@@ -351,7 +357,16 @@ showGRAPHMM([['Label', 'Value'],
 showGRAPHYY([['Label', 'Value'],
 ['Yearly', countYY]
 ])
+} catch (error) {
 
+  coonetionError.innerHTML = `<h4 class='container errorin'> Due to poor internet connection we can't show the graph</h4>`
+  coonetionError.style.display ="block";
+    console.log('internet connection failed');
+
+}
+
+summary.innerHTML = `<h3> <span class="c">T</span>oday : ${countDD}</h3> <h3> <span class="c">W</span>eekly : ${countWW}</h3>
+<h3> <span class="c">M</span>onthly : ${countMM}</h3> <h3> <span class="c">Y</span>early : ${countYY}</h3>`
 return [countDD,countWW,countMM,countYY];
 
 

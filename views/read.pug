@@ -1,0 +1,118 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(http-equiv="X-UA-Compatible", content="IE=edge")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        title Hishab_Kitab Notes
+        link(href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl' crossorigin='anonymous')
+        script(src='https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js' integrity='sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0' crossorigin='anonymous')
+        script(src="https://cdn.jsdelivr.net/npm/chart.js")
+        style 
+            include ./../src/css/index.css
+            include ./../src/css/today.css
+    body
+        -var data = allinfo 
+        
+        .mainheadin.container
+            h1.heading
+                span.n N
+                | otes
+        .navigation.container
+            nav.navbar.navbar-expand-lg.navbar.navbar-dark.bg-dark
+                .container-fluid
+                    a.navbar-brand.headings(href='/')
+                        span.n N
+                        | otes
+                    button.navbar-toggler(type='button' data-bs-toggle='collapse' data-bs-target='#navbarNavDropdown' aria-controls='navbarNavDropdown' aria-expanded='false' aria-label='Toggle navigation')
+                         span.navbar-toggler-icon
+                    #navbarNavDropdown.collapse.navbar-collapse
+                        ul.navbar-nav
+                            li.nav-item
+                                a.nav-link(href='/myexpanses')
+                                    i.fas.fa-inr
+                                    | New Expenses
+                            li.nav-item
+                            a.nav-link(href='/mynotes')
+                                i.fas.fa-sticky-note
+                                | My Note
+                            li.nav-item
+                                a.nav-link(href='#')
+                                    i.fas.fa-info-circle
+                                    | About
+                            li.nav-item.dropdown
+                                a#navbarDropdownMenuLink.nav-link.dropdown-toggle(href='#' role='button' data-bs-toggle='dropdown' aria-expanded='false')
+                                    i.fas.fa-user-circle
+                                    | #{name.name}
+                                ul.dropdown-menu(aria-labelledby='navbarDropdownMenuLink')
+                                    li
+                                        a.dropdown-item(href='/mynotes')
+                                            i.fas.fa-key
+                                            | Delete 
+                                        a.dropdown-item(href='/allrecords')
+                                            i.fas.fa-key
+                                            | All Records
+                                    li
+                                        a.dropdown-item(href='/logout')
+                                            i.fas.fa-user-plus
+                                            | Logout
+    .charts.container 
+        label(for="chartType") Chart Type
+        select.form-control#chartType
+            option(value="bar" default="") Bar
+            option(value="line") line
+            option(value="pie") pie
+            option(value="polarArea") Polar
+        .cft
+            canvas#myChart(width= '400px' height='350px')
+            
+        
+        .tabledata.container
+            .mahak.container
+                h3
+                    span.n T
+                    |otal 
+                     
+                    span.n  I
+                    |tem
+                    span.item
+                    |-> #{data[0].totalItem}
+
+
+                h3 
+                    span.n T
+                    |otal 
+                    span.n A
+                    |mmount
+                    span.ammount 
+                    | -> #{data[0].totalAmmount}
+            table.table 
+                thead
+                    tr 
+                        th(scope="col")
+                            span.n S
+                            |.I
+                        th(scope="col")
+                            span.n T
+                            |itle 
+                        th(scope="col")
+                            span.n A
+                            |mmount
+                tbody.inside
+                    each val in data
+                        each i,index in val.data 
+                            th #{index+1}
+                            th.titles #{i.title}
+                            th.ammounts #{i.ammount}
+                            tr
+                            
+
+           
+    
+        .container.but 
+            a.btn.btn-primary(href="/allrecords") Edit 
+            a.btn.btn-danger(href="/allrecords") Delete
+
+    script
+        include ./../src/javascript/read.js
+        

@@ -559,19 +559,42 @@ app.get('/1bfsde1254854ssedwdffefvg5415ffef/:key/2de5656rdfefefef',userauth, asy
 })
 
 
+
+
 // for the crud operation 
-app.get('/myexpanses/read/:date',userauth,async (req, res)=>{
+app.get('/myexpanses/read/:dd/:mm/:yy',userauth,async (req, res)=>{
 
     let userAuth = await req.isAurthised;
 
     if(userAuth)
     {
-        let RcdsDte = req.params.date;
+        let RcdsD = req.params.dd;
+        let RcdsM = req.params.mm;
+        let RcdsY = req.params.yy;
 
-        let thisRcds =  userAuth.allrecords.filter(e => (e.date == RcdsDte) )
+        try {
+            let thisRcds =  userAuth.allrecords.filter(e => (e.dd == RcdsD && e.mm == RcdsM && e.yy == RcdsY) )
 
-        console.log(RcdsDte,thisRcds);
-       return  res.status(200).json(thisRcds)
+            if(thisRcds.length == 0)
+            {
+
+                return res.send('<h1> No records found on this day ...</h1>');
+
+            }
+            else{
+    
+                return res.render('read',{
+                    allinfo : thisRcds,
+                    name : userAuth
+                })
+            }
+
+        } catch (error) {
+            
+            return res.json({status: false,name : userAuth.name,message :null})
+
+        }
+  
 
     }else
     {
@@ -587,6 +610,41 @@ app.get('/myexpanses/read/:date',userauth,async (req, res)=>{
 })
 
 
+
+app.get('/myexpanses/delete/:dd/:mm/:yy',userauth,async(req,res) => {
+
+    let useroth = await req.isAurthised;
+
+    if(useroth)
+    {
+        let varyfied = useroth.allrecords.filter(e=>(e.dd == req.params.dd && e.mm == req.params.mm && e.yy == req.params.yy));
+
+        if(varyfied.length == 0)
+        {
+            return res.status(200).send('<h1> no record found on this day.</h1>')
+        }else
+        {
+            return res.status(200).render('dpass',{
+                allinfo : useroth.name,
+                dd : req.params.dd,
+                mm : req.params.mm,
+                yy: req.params.yy
+
+            })
+        }
+         
+
+    }else
+    {
+        
+        return res.status(200).redirect('/signin');
+    }
+})
+
+
+app.post('/varify/deleting/',userauth,async(req,res) =>{
+    res.send('himanshu')
+})
 
 http.listen(_port, () => {
 

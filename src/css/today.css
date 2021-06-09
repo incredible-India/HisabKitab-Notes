@@ -71,9 +71,12 @@ h3{
     display: flex;
     justify-content:center;
     align-items:center;
+ 
     
 }
-
+.btn-danger{
+    margin-left: 10px;
+}
 label {
     margin-top: 25px;
 

@@ -63,3 +63,13 @@ table{
 
 }
 
+.errorin{
+    text-align: center;
+    margin-top:15px;
+}
+
+.summary{
+    display: flex;
+    flex-direction:row;
+    justify-content:space-evenly
+}

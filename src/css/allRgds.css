@@ -71,7 +71,8 @@ table{
 .summary{
     display: flex;
     flex-direction:row;
-    justify-content:space-evenly
+    justify-content:space-evenly;
+    background-image: linear-gradient(to right,#000,#999);
 }
 
 .allbootom{

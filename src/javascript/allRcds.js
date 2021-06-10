@@ -11,6 +11,8 @@ let showTable = document.getElementsByClassName('show')[0]; //table + heading la
 let NoRcds = document.getElementsByClassName('show_hide')[0]; //for no records
 let coonetionError = document.getElementsByClassName('coonetionError')[0];//if there will be no inetrnet connection 
 let summary = document.getElementsByClassName('summary')[0];//all the summary of hisab
+let headingTable = document.getElementsByClassName('heading')[0];//this is for the top heading of the table
+let datewise = document.getElementsByClassName('datewise')[0];//date  wise filter option input type == date
 // event for the dark and the light mode  
 DarkMode.onclick = function (event) {
   //for making the webpage in darkmode
@@ -375,16 +377,155 @@ return [countDD,countWW,countMM,countYY];
 
 //for the filter function
 
-
+//for a particular date function
 function changeDataAndInfo(status,data,heading)
 {
+
+
+
   if(status)
   {
     document.getElementsByClassName('norcd')[0].innerHTML =`
-    
+
     <h1><span class="c">N</span>o <span class="c">R</span>ecords <span class="c">F</span>ound  </h1>
     `
+
+    showTable.style.display ="none";
+
+    document.getElementsByClassName('norcd')[0].style.display ="block";
+  }else
+  {
+    document.getElementsByClassName('norcd')[0].style.display ="none";
+
+
+    if(typeof(data) == "object")
+    {
+
+      //table top most heading
+
+      headingTable.innerHTML = `<span class="c">${data.dd}</span> / ${data.mm} /${data.yy}`
+
+      firstTable.innerHTML = `
+            
+      <tr>
+
+      <th scope="col"><span class="c">D</span>ate</th>
+      <th scope="col"><span class="c">T</span>otal <span class="c">E</span>xpanses</th>
+      <th scope="col"><span class="c">I</span>tems</th>
+      <th scope="col"><span class="c">O</span>ptions</th>
+    </tr>
+  </thead>   
+      
+      `
+    tableBODY.innerHTML ="";
+
+      tableBODY.innerHTML += `
+            
+      <tr>
+
+      <th>${data.date}</th>
+      <th>${data.totalAmmount}</th>
+      <th>${data.totalItem}</th>
+      <th><a href="myexpanses/read/${data.date}">View</a> / <a href="myexpanses/edit/${data.date}">Edit</a> / <a href="myexpanses/delete/${data.date}">Delete</a> </th>
+    </tr>
+      
+      `
+
+    }else
+    {
+      console.log("we will discuss Tommorow");
+    }
+
+
+
   }
 
 }
 
+//for the perticular date we are fetching the data
+
+
+
+datewise.onchange = async function(event){
+
+
+  try {
+    
+    let searchingDate = this.value;
+
+    searchingDate = searchingDate.replace('-','/');
+    searchingDate = searchingDate.replace('-','/');
+
+    let temparr  =  searchingDate.split('');
+
+  
+
+    for(let i = 0 ; i<temparr.length; i++)
+    {
+
+      if(i==5 && temparr[i]==0)
+      {
+        temparr.splice(i,1);
+
+      }else if(i==(temparr.length-2) && temparr[i]==0)
+      {
+        temparr.splice(i,1);
+      }
+      else
+      {
+       continue;
+      }
+
+    }
+
+    let year =  temparr.splice(0,4);
+
+    // temparr.reverse();
+
+    temparr = temparr.concat(year);
+
+    console.log(year,temparr);
+
+
+    console.log(temparr);
+
+    fetch('http://localhost:80/1bfsde1254854ssedwdffefvg5415ffef/123f5d56e871d54s5d45w/2de5656rdfefefef')
+    .then(jsonData => jsonData.json())
+    .then(theData =>{
+      
+     if(theData.status)
+     {
+       for(i in theData)
+       {
+         if(theData[i].date == this.value)
+         {
+           console.log("yes");
+         }else
+         {
+           console.log(this.value);
+           console.log("no");
+         }
+       }
+
+     }else
+     {
+       alert('Server does not responding..');
+     }
+
+
+
+
+
+    }).catch(err => alert("we are facing some technical issues.."));
+
+
+
+  } catch (error) {
+
+    alert(error)
+    
+  }
+
+
+
+}

@@ -642,8 +642,71 @@ app.get('/myexpanses/delete/:dd/:mm/:yy',userauth,async(req,res) => {
 })
 
 
-app.post('/varify/deleting/',userauth,async(req,res) =>{
-    res.send('himanshu')
+app.post('/varify/deleting/',userauth,[
+
+    check('password').not().isEmpty().trim(),
+
+    check('date').not().isEmpty().trim()
+
+],async(req,res) =>{
+    
+   let useroth = await req.isAurthised; 
+
+   if(useroth){
+
+
+    const errorinPass = validationResult(req);
+
+    if(!errorinPass.isEmpty()){ 
+
+        return res.json(errorinPass);
+    }
+
+
+    let passwordURL = req.body.password;
+
+    if(passwordURL == useroth.password)
+    {
+
+        let varifyOnce = useroth.allrecords.filter(e=> (e.date != String(req.body.date)));
+   
+        if(varifyOnce.length == 0)
+        {
+            return res.status(200).send('<h1>No record found on this day ! &#x1f604</h1>')
+
+        }else
+        {
+            try {
+                UserDBS.findOneAndUpdate({_id : useroth._id},{allrecords : varifyOnce},(err,data)=>{
+
+                    if(err){
+                        return res.status(200).json(err);
+                    }else
+                    {
+                        
+                        return res.redirect('/allrecords')
+                    }
+                })
+
+            } catch (error) {
+                
+                return res.status(200).send(error)
+            }
+             
+         }
+
+        
+    }else
+    {
+        return res.status(200).send('<h1>incorrect password ! &#x1f604</h1>')
+    }
+  
+}else
+{
+    return res.status(200).redirect('/signin');
+}
+
+
 })
 
 http.listen(_port, () => {

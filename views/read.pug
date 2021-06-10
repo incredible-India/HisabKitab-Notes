@@ -86,6 +86,10 @@ html(lang="en")
                     |mmount
                     span.ammount 
                     | -> #{data[0].totalAmmount}
+
+                h3 
+                    span.n #{data[0].dd}
+                    |/#{data[0].mm}/#{data[0].yy}
             table.table 
                 thead
                     tr 
@@ -110,8 +114,8 @@ html(lang="en")
            
     
         .container.but 
-            a.btn.btn-primary(href="/allrecords") Edit 
-            a.btn.btn-danger(href="/allrecords") Delete
+            a.btn.btn-primary(href="/myexpanses/delete/" + data[0].dd + '/' + data.mm + '/' + data.yy) Edit 
+            a.btn.btn-danger(href="/myexpanses/delete/" + data[0].dd + '/' + data[0].mm + '/' + data[0].yy) Delete
 
     script
         include ./../src/javascript/read.js

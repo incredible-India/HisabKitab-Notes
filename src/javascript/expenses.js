@@ -150,7 +150,7 @@ claculateData.addEventListener('click', event => {
   }
 
 
-  Expnasese.date = TodayDate.getDate()+ '/'+TodayDate.getMonth()+'/'+TodayDate.getUTCFullYear()
+  Expnasese.date =  TodayDate.getDate()+ '/'+TodayDate.getMonth()+'/'+TodayDate.getUTCFullYear()
   Expnasese.totalItem = countIt;
   Expnasese.totalAmmount = TotalSum;
   Expnasese.dd = TodayDate.getDate();

@@ -373,3 +373,18 @@ return [countDD,countWW,countMM,countYY];
 }
 
 
+//for the filter function
+
+
+function changeDataAndInfo(status,data,heading)
+{
+  if(status)
+  {
+    document.getElementsByClassName('norcd')[0].innerHTML =`
+    
+    <h1><span class="c">N</span>o <span class="c">R</span>ecords <span class="c">F</span>ound  </h1>
+    `
+  }
+
+}
+

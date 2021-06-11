@@ -331,7 +331,7 @@ for(let i=1; i<=lengthOfDAT ; i++)
   if(date.getDate() == userDATA.data.expanses.dd && date.getMonth() == userDATA.data.expanses.mm && date.getFullYear() == userDATA.data.expanses.yy)
   {
 
-    countDD = userDATA.data.expanses.totalAmmount;
+    countDD = userDATA.data.expanses.totalAmmount; //ye pe gadbad hai delete hone ka bbad bhi total de rha hai
 
   }else
   {
@@ -448,6 +448,7 @@ function changeDataAndInfo(status,data,heading)
 
 datewise.onchange = async function(event){
 
+  console.log(datewise.value);
 
   try {
     
@@ -458,7 +459,7 @@ datewise.onchange = async function(event){
 
     let temparr  =  searchingDate.split('');
 
-  
+ 
 
     for(let i = 0 ; i<temparr.length; i++)
     {
@@ -478,16 +479,26 @@ datewise.onchange = async function(event){
 
     }
 
-    let year =  temparr.splice(0,4);
+// let dd = [];
+// let mm = [];
+// let yy = [];
+    
 
-    // temparr.reverse();
+//     for(let i =0 ; i<temparr.length;i++){{
+    
+//       if(0<=i<=3)
+//       {
+//         yy[i] = temparr[i]
+//       }
+//       else if()
 
-    temparr = temparr.concat(year);
+//     }}
 
-    console.log(year,temparr);
+  
+    
 
 
-    console.log(temparr);
+    console.log(temparr,dd,mm,yy);
 
     fetch('http://localhost:80/1bfsde1254854ssedwdffefvg5415ffef/123f5d56e871d54s5d45w/2de5656rdfefefef')
     .then(jsonData => jsonData.json())
@@ -516,7 +527,7 @@ datewise.onchange = async function(event){
 
 
 
-    }).catch(err => alert("we are facing some technical issues.."));
+    }).catch(err => alert("we are facing some technical issues..",err));
 
 
 

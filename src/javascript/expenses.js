@@ -7,7 +7,7 @@ Expnasese.data = new Array;
 
 
 document.getElementsByClassName('dateinfo')[0].innerHTML = `<h3 style="text-align: right;">
-${TodayDate.getDate()}\\${TodayDate.getMonth()}\\<span class="n">${TodayDate.getUTCFullYear()}</span></h3>
+${TodayDate.getDate()}\\${TodayDate.getMonth() + 1}\\<span class="n">${TodayDate.getUTCFullYear()}</span></h3>
 
 <h3 title = "total expanses" style="text-align: left;"> <span class = "n">T</span>otal : <span class="numberCount">1</span></h3> </h3>
 
@@ -149,12 +149,14 @@ claculateData.addEventListener('click', event => {
 
   }
 
+ 
 
-  Expnasese.date =  TodayDate.getDate()+ '/'+TodayDate.getMonth()+'/'+TodayDate.getUTCFullYear()
+
+  Expnasese.date = TodayDate.toLocaleDateString();
   Expnasese.totalItem = countIt;
   Expnasese.totalAmmount = TotalSum;
   Expnasese.dd = TodayDate.getDate();
-  Expnasese.mm =TodayDate.getMonth();
+  Expnasese.mm = TodayDate.getMonth() + 1;
   Expnasese.yy =TodayDate.getUTCFullYear();
 
 

@@ -627,7 +627,7 @@ app.get('/myexpanses/delete/:dd/:mm/:yy',userauth,async(req,res) => {
             return res.status(200).render('dpass',{
                 allinfo : useroth.name,
                 dd : req.params.dd,
-                mm : req.params.mm,
+                mm : req.params.mm, //yeha pe sudhr
                 yy: req.params.yy
 
             })

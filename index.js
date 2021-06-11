@@ -626,7 +626,7 @@ app.get('/myexpanses/delete/:dd/:mm/:yy',userauth,async(req,res) => {
         {
             return res.status(200).render('dpass',{
                 allinfo : useroth.name,
-                dd : req.params.dd,
+                dd : req.params.dd,//yehabhi
                 mm : req.params.mm, //yeha pe sudhr
                 yy: req.params.yy
 
@@ -670,7 +670,7 @@ app.post('/varify/deleting/',userauth,[
 
         let varifyOnce = useroth.allrecords.filter(e=> (e.date != String(req.body.date)));
    
-        if(varifyOnce.length == 0)
+        if(varifyOnce.length == 0 && useroth.allrecords.length != 1)
         {
             return res.status(200).send('<h1>No record found on this day ! &#x1f604</h1>')
 

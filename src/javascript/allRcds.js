@@ -13,6 +13,7 @@ let coonetionError = document.getElementsByClassName('coonetionError')[0];//if t
 let summary = document.getElementsByClassName('summary')[0];//all the summary of hisab
 let headingTable = document.getElementsByClassName('heading')[0];//this is for the top heading of the table
 let datewise = document.getElementsByClassName('datewise')[0];//date  wise filter option input type == date
+let allbootom = document.getElementsByClassName('allbootom')[0]; //side bar for the filter
 // event for the dark and the light mode  
 DarkMode.onclick = function (event) {
   //for making the webpage in darkmode
@@ -52,6 +53,7 @@ fetchingApi().then(CDATA => {
     if (lengthOfTotalRecords == 0) {
 
       showTable.style.display = "none";//hiding the table
+      allbootom.style.display = "none"
       NoRcds.style.display = "block";//showing the image
       firstTable.innerHTML = `
             
@@ -479,20 +481,6 @@ datewise.onchange = async function(event){
 
     }
 
-// let dd = [];
-// let mm = [];
-// let yy = [];
-    
-
-//     for(let i =0 ; i<temparr.length;i++){{
-    
-//       if(0<=i<=3)
-//       {
-//         yy[i] = temparr[i]
-//       }
-//       else if()
-
-//     }}
 
   
     

@@ -148,15 +148,13 @@ claculateData.addEventListener('click', event => {
 
 
   }
+    
 
- 
-
-
-  Expnasese.date = TodayDate.toLocaleDateString();
+  Expnasese.date =  TodayDate.getDate()+ '/'+(TodayDate.getMonth() + 1)+'/'+TodayDate.getUTCFullYear()
   Expnasese.totalItem = countIt;
   Expnasese.totalAmmount = TotalSum;
   Expnasese.dd = TodayDate.getDate();
-  Expnasese.mm = TodayDate.getMonth() + 1;
+  Expnasese.mm =(TodayDate.getMonth() + 1);
   Expnasese.yy =TodayDate.getUTCFullYear();
 
 

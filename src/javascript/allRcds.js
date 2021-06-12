@@ -330,7 +330,7 @@ for(let i=1; i<=lengthOfDAT ; i++)
     countYY = countYY + userDATA.data.allrecords[lengthOfDAT - i].totalAmmount;
   }
 
-  if(date.getDate() == userDATA.data.expanses.dd && date.getMonth() == userDATA.data.expanses.mm && date.getFullYear() == userDATA.data.expanses.yy)
+  if(date.getDate() == userDATA.data.expanses.dd && (date.getMonth() + 1) == userDATA.data.expanses.mm && date.getFullYear() == userDATA.data.expanses.yy)
   {
 
     countDD = userDATA.data.expanses.totalAmmount; //ye pe gadbad hai delete hone ka bbad bhi total de rha hai
@@ -389,7 +389,7 @@ function changeDataAndInfo(status,data,heading)
   {
     document.getElementsByClassName('norcd')[0].innerHTML =`
 
-    <h1><span class="c">N</span>o <span class="c">R</span>ecords <span class="c">F</span>ound  </h1>
+    <h1 class="nf"><span class="c">N</span>o <span class="c">R</span>ecords <span class="c">F</span>ound  </h1><hr>
     `
 
     showTable.style.display ="none";
@@ -404,7 +404,7 @@ function changeDataAndInfo(status,data,heading)
     {
 
       //table top most heading
-
+      showTable.style.display ="block";
       headingTable.innerHTML = `<span class="c">${data.dd}</span> / ${data.mm} /${data.yy}`
 
       firstTable.innerHTML = `
@@ -450,7 +450,7 @@ function changeDataAndInfo(status,data,heading)
 
 datewise.onchange = async function(event){
 
-  console.log(datewise.value);
+  
 
   try {
     
@@ -459,34 +459,19 @@ datewise.onchange = async function(event){
     searchingDate = searchingDate.replace('-','/');
     searchingDate = searchingDate.replace('-','/');
 
-    let temparr  =  searchingDate.split('');
+    let temparr  =  searchingDate.split('/');
 
- 
-
-    for(let i = 0 ; i<temparr.length; i++)
-    {
-
-      if(i==5 && temparr[i]==0)
-      {
-        temparr.splice(i,1);
-
-      }else if(i==(temparr.length-2) && temparr[i]==0)
-      {
-        temparr.splice(i,1);
-      }
-      else
-      {
-       continue;
-      }
-
-    }
-
-
-  
+    let DD= parseInt(temparr[2]);
+    let MM= parseInt(temparr[1]);
+    let YY= parseInt(temparr[0]);
     
 
 
-    console.log(temparr,dd,mm,yy);
+
+  temparr = null;
+    
+
+
 
     fetch('http://localhost:80/1bfsde1254854ssedwdffefvg5415ffef/123f5d56e871d54s5d45w/2de5656rdfefefef')
     .then(jsonData => jsonData.json())
@@ -494,15 +479,18 @@ datewise.onchange = async function(event){
       
      if(theData.status)
      {
-       for(i in theData)
+       for(i in theData.data.allrecords)
        {
-         if(theData[i].date == this.value)
+         
+         if(theData.data.allrecords[i].dd == DD && theData.data.allrecords[i].mm == MM && theData.data.allrecords[i].yy == YY)
          {
-           console.log("yes");
+           
+            changeDataAndInfo(false, theData.data.allrecords[i],null);
          }else
          {
-           console.log(this.value);
-           console.log("no");
+         
+        
+           changeDataAndInfo(true, null,null);
          }
        }
 
@@ -528,3 +516,5 @@ datewise.onchange = async function(event){
 
 
 }
+
+///particular date fuilter system code done

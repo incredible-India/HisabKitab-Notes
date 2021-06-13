@@ -14,6 +14,7 @@ let summary = document.getElementsByClassName('summary')[0];//all the summary of
 let headingTable = document.getElementsByClassName('heading')[0];//this is for the top heading of the table
 let datewise = document.getElementsByClassName('datewise')[0];//date  wise filter option input type == date
 let allbootom = document.getElementsByClassName('allbootom')[0]; //side bar for the filter
+let lastSelect = document.getElementsByClassName('lastSelect')[0];//for the select tag of last options 
 // event for the dark and the light mode  
 DarkMode.onclick = function (event) {
   //for making the webpage in darkmode
@@ -399,8 +400,9 @@ function changeDataAndInfo(status,data,heading)
   {
     document.getElementsByClassName('norcd')[0].style.display ="none";
 
+    
 
-    if(typeof(data) == "object")
+    if(typeof(data) == "object" && heading == null)
     {
 
       //table top most heading
@@ -435,7 +437,80 @@ function changeDataAndInfo(status,data,heading)
 
     }else
     {
-      console.log("we will discuss Tommorow");
+      
+      let theLeangth = data.length
+     
+      if(theLeangth == 0)
+      {
+        alert("Data has been deleted")
+        return ;
+      }else
+
+      showTable.style.display ="block";
+
+      //heaeding text
+      if(heading == 7)
+      {
+        headingTable.innerHTML = `<span class="c">L</span>ast <span class="c">O</span>ne <span class="c">W</span>eek`
+      }else if(heading == 14)
+      {
+        headingTable.innerHTML = `<span class="c">L</span>ast <span class="c">T</span>wo <span class="c">W</span>eeks`
+      }else if(heading == 31)
+      {
+        headingTable.innerHTML = `<span class="c">L</span>ast <span class="c">O</span>ne <span class="c">M</span>onth`
+      }else if(heading == 153)
+      {
+        headingTable.innerHTML = `<span class="c">L</span>ast <span class="c">F</span>ive <span class="c">M</span>onths`
+      }else if(heading == 365)
+      {
+        headingTable.innerHTML = `<span class="c">L</span>ast <span class="c">O</span>ne <span class="c">Y</span>ear`
+      }else if(heading == 1828)
+      {
+        headingTable.innerHTML = `<span class="c">L</span>ast <span class="c">F</span>ive <span class="c">Y</span>ears`
+      }else if(heading == 3000)
+      {
+        headingTable.innerHTML = `<span class="c">A</span>ll`
+      }
+
+     
+
+      if(heading <= theLeangth)
+      {
+        if(heading == 3000){
+          thisValue = 0;
+        }else
+        {
+          thisValue = heading; //now the fro loop will execute upto here...
+        }
+       
+
+      }else
+      {
+         thisValue =0 ; //form here up to for loop
+      }
+
+      tableBODY.innerHTML ="";
+      console.log(thisValue);
+      for(let i = (theLeangth -1); i>= thisValue ; i--)
+      {
+
+        
+
+      tableBODY.innerHTML += `
+            
+      <tr>
+
+      <th>${data[i].date}</th>
+      <th>${data[i].totalAmmount}</th>
+      <th>${data[i].totalItem}</th>
+      <th><a href="myexpanses/read/${data[i].date}">View</a> / <a href="myexpanses/edit/${data[i].date}">Edit</a> / <a href="myexpanses/delete/${data[i].date}">Delete</a> </th>
+    </tr>
+      
+      `
+
+
+      }
+
     }
 
 
@@ -484,13 +559,15 @@ datewise.onchange = async function(event){
          
          if(theData.data.allrecords[i].dd == DD && theData.data.allrecords[i].mm == MM && theData.data.allrecords[i].yy == YY)
          {
-           
+       
             changeDataAndInfo(false, theData.data.allrecords[i],null);
+            return;
          }else
          {
-         
+ 
         
            changeDataAndInfo(true, null,null);
+           
          }
        }
 
@@ -518,3 +595,48 @@ datewise.onchange = async function(event){
 }
 
 ///particular date fuilter system code done
+//********************************************* */
+
+
+//for the last selections of
+
+lastSelect.onchange = (e)=>{
+  console.log(lastSelect.value);
+
+  fetch('http://localhost:80/1bfsde1254854ssedwdffefvg5415ffef/123f5d56e871d54s5d45w/2de5656rdfefefef')
+  .then(jsonData => jsonData.json())
+  .then(local => {
+    if(local.status)
+    {
+
+      let lengthOFRCDS = local.data.allrecords.length;
+
+
+      if(lengthOFRCDS == 0){
+
+        changeDataAndInfo(true, null,null);
+      
+        return ;
+      }else
+      {
+    
+        changeDataAndInfo(false,local.data.allrecords,lastSelect.value);
+        return ;
+      }
+
+      
+
+    
+
+    }else
+    {
+      alert('Failed to fetch data')
+    }
+
+
+
+
+
+  })
+
+}

@@ -709,6 +709,99 @@ app.post('/varify/deleting/',userauth,[
 
 })
 
+
+
+//delete all records and the confirmation
+
+app.get('/delete/allrecords', userauth, async (req, res)=>{
+
+    let userdata = await req.isAurthised;
+
+    if(userdata)
+    {
+        if(userdata.allrecords.length == 0)
+        {
+            res.status(200);
+            res.setHeader('Content-Type', 'text/html');
+            return res.send('<h1> Your Records Already Has Been Empty</h1>')
+        }else
+        {
+            res.status(200);
+            res.setHeader('Content-Type', 'text/html');
+            res.render('cnfDel',{
+            name : userdata.name
+            })
+        }
+     
+        
+    }else
+    {
+        return res.status(200).redirect('/signin');
+
+    }
+
+
+})
+
+
+// after typing password delete all records 
+
+app.post('/cnf/cnfdata/delete/all',userauth,[
+
+    check('password').not().isEmpty().trim(),
+
+],async(req, res)=>{
+
+    dataof =  await req.isAurthised;
+
+    const errorinPass = validationResult(req);
+
+    if(!errorinPass.isEmpty()){ 
+
+        return res.json(errorinPass);
+    }
+
+    if(dataof)
+    {
+
+        if(dataof.password == req.body.password){
+
+            if(dataof.allrecords.length == 0)
+        {
+            res.status(200);
+            res.setHeader('Content-Type', 'text/html');
+            return res.send('<h1> Your Records Already Has Been Empty</h1>')
+        }else
+
+        {
+             UserDBS.findOneAndUpdate({_id : dataof._id},{allrecords : []},(err,data)=>{
+                 if(err)
+                 {
+                     return res.send(err)
+                 }
+                 console.log(data);
+                 return res.redirect('/allrecords')
+             })
+        }
+
+
+        }else
+        {
+
+            return res.status(200).send('<h1> Incorrect Password..</h1>')
+        }
+
+
+
+    }else
+    {
+        return res.status(200).redirect('/signin');
+    }
+
+})
+
+//code done for the all records deletion
+
 http.listen(_port, () => {
 
     console.log(chalk.bgCyanBright.redBright(process.env.SUCCESS_MESSAGE));

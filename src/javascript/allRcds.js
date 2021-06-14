@@ -1,6 +1,4 @@
-
-
-
+/**Himanshu Kumar Sharma */
 let DarkMode = document.getElementsByClassName('darks')[0]; //for making the webpage in darkmode
 let username = document.getElementsByClassName('username')[0]; //user name in navigation bar
 let errorAlert = document.getElementsByClassName('alert')[0]; //this is the alert box default it is hide

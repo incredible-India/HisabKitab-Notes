@@ -1,3 +1,4 @@
 web socket connection on differen pages weite in the notes
 
 datev formate in // -- type in allrcds.js particular date api fetching and allexpanecs.js saving in dbs date in formate of //
+edit option and the about is to be created

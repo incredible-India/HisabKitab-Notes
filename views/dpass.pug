@@ -12,6 +12,7 @@ html(lang="en")
         style 
             include ./../src/css/pass.css
     body
+        -var linkData = linkdata
         .mainheadin.container
             h1.heading
                 span.n N
@@ -57,14 +58,14 @@ html(lang="en")
 
         .container
             h2.container.text Once you 
-                span.n Deleted 
+                span.n #{textmessage} 
                 | your data you cannot get it back.
 
         .img
             img.img-fluid(src='/images/gogo.svg' alt='hello' width='200px' height='250px')
 
         .form.container
-            form(action='/varify/deleting/' method='POST')
+            form(action= linkData method='POST')
                 label(for='pass') Enter your password
                 input#pass.form-control(type='password' name='password' required)
                 input#date.form-control(type='text' name='date'  value = dd +'/'+ mm +'/'+ yy)

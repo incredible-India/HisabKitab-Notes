@@ -629,6 +629,8 @@ app.get('/myexpanses/delete/:dd/:mm/:yy',userauth,async(req,res) => {
                 dd : req.params.dd,//yehabhi
                 mm : req.params.mm, //yeha pe sudhr
                 yy: req.params.yy
+                ,textmessage :  "Deleted",
+                linkdata  :"/varify/deleting/"
 
             })
         }
@@ -729,7 +731,7 @@ app.get('/delete/allrecords', userauth, async (req, res)=>{
             res.status(200);
             res.setHeader('Content-Type', 'text/html');
             res.render('cnfDel',{
-            name : userdata.name
+            name : userdata.name1
             })
         }
      
@@ -801,6 +803,101 @@ app.post('/cnf/cnfdata/delete/all',userauth,[
 })
 
 //code done for the all records deletion
+//for editing the data 
+
+app.get('/myexpanses/edit/:dd/:mm/:yy',userauth,async (req,res)=>{
+
+    let useroth = await req.isAurthised;
+
+    if(useroth)
+    {
+        let varyfied = useroth.allrecords.filter(e=>(e.dd == req.params.dd && e.mm == req.params.mm && e.yy == req.params.yy));
+
+        if(varyfied.length == 0)
+        {
+            return res.status(200).send('<h1> no record found on this day.</h1>')
+        }else
+        {
+            return res.status(200).render('dpass',{
+                allinfo : useroth.name,
+                dd : req.params.dd,//yehabhi
+                mm : req.params.mm, //yeha pe sudhr
+                yy: req.params.yy,
+                textmessage : "Edit",
+                linkdata : "/varify/editing/"
+
+            })
+        }
+         
+
+    }else
+    {
+        
+        return res.status(200).redirect('/signin');
+    }
+})
+
+
+
+///varifying the password for the editing the data
+
+app.post('/varify/editing/' , [
+
+    check('password').not().isEmpty().trim(),
+
+],
+userauth,async (req,res)=>{
+
+    let useroth = await req.isAurthised; 
+
+    if(useroth){
+ 
+ 
+     const errorinPass = validationResult(req);
+ 
+     if(!errorinPass.isEmpty()){ 
+ 
+         return res.json(errorinPass);
+     }
+ 
+ 
+     let passwordURL = req.body.password;
+ 
+     if(passwordURL == useroth.password)
+     {
+ 
+         let varifyOnce = useroth.allrecords.filter(e=> (e.date != String(req.body.date)));
+    
+         if(varifyOnce.length == 0 && useroth.allrecords.length != 1)
+         {
+             return res.status(200).send('<h1>No record found on this day ! &#x1f604</h1>')
+ 
+         }else
+         {
+             try {
+                
+                return res.send("hello form") //start work from here
+ 
+             } catch (error) {
+                 
+                 return res.status(200).send(error)
+             }
+              
+          }
+ 
+         
+     }else
+     {
+         return res.status(200).send('<h1>incorrect password ! &#x1f604</h1>')
+     }
+   
+ }else
+ {
+     return res.status(200).redirect('/signin');
+ }
+ 
+
+})
 
 http.listen(_port, () => {
 

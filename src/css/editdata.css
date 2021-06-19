@@ -38,9 +38,10 @@
 
 form{
     overflow-y: auto;
-    height :300px;
+    height :500px;
     display : flex;
     justify-content:space-evenly;
+    margin-bottom: 25px;
 
 }
 .tit{
@@ -50,6 +51,7 @@ form{
 
 .amm{
     font-weight: 500;
+   
 }
 
 .btn{
@@ -77,4 +79,9 @@ input[type="text"]
 .dt{
     margin: 10px;
     width :100%;
+}
+
+.cut{
+    font-size:25px;
+    cursor: pointer;
 }

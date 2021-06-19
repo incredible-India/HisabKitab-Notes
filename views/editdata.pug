@@ -81,16 +81,18 @@ html(lang="en")
                   each val in titles
                    each item in val.data
                     .jk
-                        input(type='text' class='form-control tit' value=item.title)
-                        input(type='text' class='form-control amm' value = item.ammount)
+                        input(type='text' class='form-control tit ct' value=item.title)
+                        input(type='number' class='form-control amm ct' value = item.ammount)
 
 
                 .addmore 
 
 
                 .btns 
-                  input.btn.btn-warning(type="button" value="Add One")
-                  input.btn.btn-dark(type="submit" value="Submit")
-                    
-                
-                  
+                  input.btn.btn-warning#addone(type="button" value="Add One")
+                  input.btn.btn-dark#apply(type="submit" value="Apply & Preview")
+
+    
+
+    script 
+        include ./../src/javascript/edit.js      

@@ -868,7 +868,7 @@ userauth,async (req,res)=>{
  
          let varifyOnce = useroth.allrecords.filter(e=> (e.date == String(req.body.date)));
     
-         console.log(varifyOnce);
+        
 
          if(varifyOnce.length == 0)
          {

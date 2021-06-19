@@ -1,0 +1,96 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(http-equiv="X-UA-Compatible", content="IE=edge")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        title Hishab_Kitab Notes
+        link(href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl' crossorigin='anonymous')
+        script(src='https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js' integrity='sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0' crossorigin='anonymous')
+        style 
+            include ./../src/css/index.css
+            include ./../src/css/editdata.css
+    body
+        -var date = date
+        -var titles = listdata
+        .mainheadin.container
+            h1.heading
+                span.n N
+                | otes
+        .navigation.container
+            nav.navbar.navbar-expand-lg.navbar.navbar-dark.bg-dark
+                .container-fluid
+                    a.navbar-brand.headings(href='/')
+                        span.n N
+                        | otes
+                    button.navbar-toggler(type='button' data-bs-toggle='collapse' data-bs-target='#navbarNavDropdown' aria-controls='navbarNavDropdown' aria-expanded='false' aria-label='Toggle navigation')
+                         span.navbar-toggler-icon
+                    #navbarNavDropdown.collapse.navbar-collapse
+                        ul.navbar-nav
+                            li.nav-item
+                                a.nav-link(href='/myexpanses')
+                                    i.fas.fa-inr
+                                    | New Expenses
+                            li.nav-item
+                            a.nav-link(href='/mynotes')
+                                i.fas.fa-sticky-note
+                                | My Note
+                            li.nav-item
+                                a.nav-link(href='#')
+                                    i.fas.fa-info-circle
+                                    | About
+                            li.nav-item.dropdown
+                                a#navbarDropdownMenuLink.nav-link.dropdown-toggle(href='#' role='button' data-bs-toggle='dropdown' aria-expanded='false')
+                                    i.fas.fa-user-circle
+                                    | #{allinfo}
+                                ul.dropdown-menu(aria-labelledby='navbarDropdownMenuLink')
+                                    li
+                                        a.dropdown-item(href='/mynotes')
+                                            i.fas.fa-key
+                                            | My Notes
+                                        a.dropdown-item(href='/')
+                                            i.fas.fa-key
+                                            | My Expanses
+                                    li
+                                        a.dropdown-item(href='/logout')
+                                            i.fas.fa-user-plus
+                                            | Logout
+        
+
+        .container.img 
+            img.img.fluid(src='/images/mahila.svg' alt='hello' width='200px' height='250px')
+
+        
+        .container.edit 
+            h3
+                span.c E
+                |DIT DATA
+            
+        .container.date
+            h4  Editing the data of 
+                span.c #{date}
+            h4  Today`s date 
+                span.c #{today}
+
+
+        .container.previewdata 
+            form.form-control(action="") 
+                .newDate 
+                    input(type='text' class='form-control dt' value = date)
+                .titleAmmount
+                  each val in titles
+                   each item in val.data
+                    .jk
+                        input(type='text' class='form-control tit' value=item.title)
+                        input(type='text' class='form-control amm' value = item.ammount)
+
+
+                .addmore 
+
+
+                .btns 
+                  input.btn.btn-warning(type="button" value="Add One")
+                  input.btn.btn-dark(type="submit" value="Submit")
+                    
+                
+                  

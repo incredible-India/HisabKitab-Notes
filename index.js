@@ -866,9 +866,11 @@ userauth,async (req,res)=>{
      if(passwordURL == useroth.password)
      {
  
-         let varifyOnce = useroth.allrecords.filter(e=> (e.date != String(req.body.date)));
+         let varifyOnce = useroth.allrecords.filter(e=> (e.date == String(req.body.date)));
     
-         if(varifyOnce.length == 0 && useroth.allrecords.length != 1)
+         console.log(varifyOnce);
+
+         if(varifyOnce.length == 0)
          {
              return res.status(200).send('<h1>No record found on this day ! &#x1f604</h1>')
  
@@ -876,14 +878,20 @@ userauth,async (req,res)=>{
          {
              try {
                 
-                return res.send("hello form") //start work from here
+                return res.render('editdata',{
+                    allinfo : useroth.name,
+                    date : req.body.date,
+                    today : new Date().toLocaleDateString(),
+                    listdata : varifyOnce
+
+                }) //start work from here
  
              } catch (error) {
                  
                  return res.status(200).send(error)
              }
               
-          }
+          } 
  
          
      }else

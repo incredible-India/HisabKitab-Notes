@@ -85,3 +85,14 @@ input[type="text"]
     font-size:25px;
     cursor: pointer;
 }
+
+.go{
+  display: flex;
+  justify-content:center;
+  align-items:center;
+    margin-top:16px;
+}
+
+.go a{
+    margin-bottom: 15px;
+}

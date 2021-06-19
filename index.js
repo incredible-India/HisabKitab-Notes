@@ -907,6 +907,82 @@ userauth,async (req,res)=>{
 
 })
 
+//after editing the data final result and saving in dbs process will be done here 
+
+
+
+app.post('/edited/redirecting/savinginDBS',[
+
+    check('editedData').not().isEmpty().trim(),
+
+],userauth,async (req, res)=>{
+
+
+    let dataofuser  = await req.isAurthised;
+
+    if(dataofuser)
+    {
+        const errorinPass = validationResult(req);
+ 
+        if(!errorinPass.isEmpty()){ 
+    
+            return res.json(errorinPass);
+        }
+
+
+      let theDataFromClient = JSON.parse(req.body.editedData);
+
+      if(theDataFromClient.dd)
+      {
+          
+        if(dataofuser.allrecords.length != 0){
+
+            let indexNumber  =  dataofuser.allrecords.findIndex(e => (e.dd== theDataFromClient.dd && e.mm == theDataFromClient.mm && e.yy == theDataFromClient.yy))
+
+            if(indexNumber == -1){
+
+                dataofuser.allrecords = dataofuser.allrecords.concat(theDataFromClient);  
+                
+            }else
+            {
+                dataofuser.allrecords[indexNumber] = theDataFromClient; 
+            }
+
+
+
+           UserDBS.findOneAndUpdate({_id : dataofuser._id},{allrecords : dataofuser.allrecords},(err,data)=>{
+
+                if(err)
+                {
+                    return res.status(200).send(err)
+                }
+
+                res.setHeader('Content-Type','text/html');
+                return res.status(200).redirect('/allrecords');
+
+           })
+
+        }else
+        {
+            return res.send('<h1> Empty Your Data  </h1>')
+
+        }
+
+      }else
+      {
+          return res.send('<h1> Sorry !!! Something went wrong </h1>')
+      }
+
+    }
+
+
+
+
+})
+
+
+
+
 http.listen(_port, () => {
 
     console.log(chalk.bgCyanBright.redBright(process.env.SUCCESS_MESSAGE));

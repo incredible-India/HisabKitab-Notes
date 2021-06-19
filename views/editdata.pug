@@ -74,7 +74,7 @@ html(lang="en")
 
 
         .container.previewdata 
-            form.form-control(action="") 
+            form.form-control(action="/edited/redirecting/savinginDBS" method='POST') 
                 .newDate 
                     input(type='text' class='form-control dt' value = date)
                 .titleAmmount
@@ -85,12 +85,20 @@ html(lang="en")
                         input(type='number' class='form-control amm ct' value = item.ammount)
 
 
-                .addmore 
+                .addmore
+
+                .mkover 
 
 
                 .btns 
                   input.btn.btn-warning#addone(type="button" value="Add One")
                   input.btn.btn-dark#apply(type="submit" value="Apply & Preview")
+
+
+
+        .go.container
+
+            a.btn.btn-primary(href="/allrecords") Go Back
 
     
 

@@ -2,7 +2,7 @@ let addOne = document.getElementById('addone');
 let insidethis = document.getElementsByClassName('addmore')[0];
 let temp =0;
 let applyBTN = document.getElementById('apply');
-
+let dateval =  document.getElementsByClassName('dt')[0];
 
 addOne.addEventListener('click', (event=>{
 
@@ -70,8 +70,65 @@ applyBTN.addEventListener('click',(event)=>{
   
     
  
-   
+   //noe storing the data 
+
+   let editedData = new Object();
 
 
+     editedData.date = dateval.value; //edited date this is
 
+     editedData.totalItem = titleO.length; //totle itme this is
+
+     let temparr = dateval.value.split("/");
+
+     
+     editedData.dd = parseInt(temparr[0]); //this is the date
+     editedData.mm = parseInt(temparr[1]);// this is the month
+     editedData.yy = parseInt(temparr[2]); // this is the year
+     
+     temparr = null;
+
+
+     let ANtempArr = new Array();
+ 
+     let totalAmmount = 0;
+
+     for(i=0 ; i< ammountO.length ;i++)
+     {
+            if(titleO[i].value == "" && ammountO[i].value == ""){
+                editedData.totalItem  = editedData.totalItem --;
+                continue;
+            }
+        let tempOBJ = new Object();
+        tempOBJ.title = titleO[i].value;
+        tempOBJ.ammount = ammountO[i].value;
+        totalAmmount += parseInt(ammountO[i].value);
+      
+       ANtempArr[i] = tempOBJ;
+
+       tempOBJ = null;
+
+     }
+
+     editedData.totalAmmount = totalAmmount; //this is the total ammount 
+     editedData.data = ANtempArr;
+
+     ANtempArr = null; // free it
+
+     let Confirmation = confirm(`Total Ammount = ${editedData.totalAmmount} \n Total Item is ${editedData.totalItem} \n Date : ${editedData.date}\n Do you want save your Data ?` )
+     //return true false
+
+     if(Confirmation)
+     {
+
+        document.getElementsByClassName('mkover')[0].innerHTML = `
+
+        <textarea name="editedData" class='form-control' cols="30" rows="1" id='mks'></textarea>
+        
+        `
+        
+        document.getElementById('mks').value= JSON.stringify(editedData);
+        editedData = null;
+        document.forms[0].submit();
+     }
 })

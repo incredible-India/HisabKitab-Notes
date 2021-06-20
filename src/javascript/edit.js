@@ -77,7 +77,7 @@ applyBTN.addEventListener('click',(event)=>{
 
      editedData.date = dateval.value; //edited date this is
 
-     editedData.totalItem = titleO.length; //totle itme this is
+    //  editedData.totalItem = titleO.length; //totle itme this is
 
      let temparr = dateval.value.split("/");
 
@@ -90,15 +90,16 @@ applyBTN.addEventListener('click',(event)=>{
 
 
      let ANtempArr = new Array();
- 
+     let items = 0;
      let totalAmmount = 0;
 
      for(i=0 ; i< ammountO.length ;i++)
      {
             if(titleO[i].value == "" && ammountO[i].value == ""){
-                editedData.totalItem  = editedData.totalItem --;
+               
                 continue;
             }
+            ++items;
         let tempOBJ = new Object();
         tempOBJ.title = titleO[i].value;
         tempOBJ.ammount = ammountO[i].value;
@@ -109,7 +110,7 @@ applyBTN.addEventListener('click',(event)=>{
        tempOBJ = null;
 
      }
-
+     editedData.totalItem = items;//this is the total items
      editedData.totalAmmount = totalAmmount; //this is the total ammount 
      editedData.data = ANtempArr;
 

@@ -30,7 +30,7 @@ const io = require('socket.io')(http, {
 
 
 
-
+hostname = '0.0.0.0' //incase of error reomve this and last line in listen port
 //giving the port number
 
 const _port = process.env.PORT || 80; //this is the port number
@@ -983,7 +983,7 @@ app.post('/edited/redirecting/savinginDBS',[
 
 
 
-http.listen(_port, () => {
+http.listen(_port,hostname, () => {
 
     console.log(chalk.bgCyanBright.redBright(process.env.SUCCESS_MESSAGE));
 })

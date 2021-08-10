@@ -980,6 +980,18 @@ app.post('/edited/redirecting/savinginDBS',[
 
 })
 
+/************************************************* */
+
+// about page 
+
+app.get('/about',(req,res)=>{
+
+    res.status(200);
+    res.setHeader('Content-Type','text/html');
+
+    res.sendFile(path.join(__dirname,'./src/html/about.html'))
+
+})
 
 
 

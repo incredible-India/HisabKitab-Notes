@@ -4,13 +4,14 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>New User</title>
-    <link rel="shortcut icon" href="./../images/icon.ico" type="image/x-icon">
+    <title>Hishab_Kitab_Notes</title>
+    <link rel="shortcut icon" href="/../images/icon.ico" type="image/x-icon">
   
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w==" crossorigin="anonymous" />
-    <link rel="stylesheet" href="./../css/newUser.css">
+    <link rel="stylesheet" href="/../css/index.css">
+    <link rel="stylesheet" href="/../css/about.css">
     
 
 
@@ -35,7 +36,7 @@
                     <a class="nav-link" href="/myexpanses"> <i class="fas fa-inr"></i> My Expenses</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="#"> <i class="fas fa-sticky-note"></i>  My Note</a>
+                    <a class="nav-link" href="/mynotes"> <i class="fas fa-sticky-note"></i>  My Note</a>
                   </li>
                   <li class="nav-item">
                     <a class="nav-link" href="/about"><i class="fas fa-info-circle"></i> About</a>
@@ -45,8 +46,8 @@
                       <i class="fas fa-user-circle"></i> User
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                      <li><a class="dropdown-item" href="/"><i class="fas fa-home"></i>Home</a></li>
-                      <li><a class="dropdown-item" href="/signin"><i class="fas fa-key"></i> Log in</a></li>
+                      <li><a class="dropdown-item" href="/signin"><i class="fas fa-key"></i> Sign in</a></li>
+                      <li><a class="dropdown-item" href="/newuser"><i class="fas fa-user-plus"></i> New User</a></li>
                       <!-- <li><a class="dropdown-item" href="#">Something else here</a></li> -->
                     </ul>
                   </li>
@@ -55,56 +56,35 @@
             </div>
           </nav>
     </div>
-    <div class="alert alert-secondary" role="alert" style="display : none;">
-      Password did not matched
+
+   <!-- //div dog 
+ -->
+ <div class="centerDOG">
+
+    <div class="images">
+        <img src="./../images/about.svg" alt="" class="img-fluid" width="150" height="160">
     </div>
-  <div class="container formBody">
-      <h3 class="display-5">
-       
-          New User
-      </h3>
-      <i class="fas fa-user-circle" style="font-size: 55px; color: red;"></i>
-      <div class="form-controlss">
-          <form action="/savedatain" method="POST" onsubmit="return checkValidation()">
-           <input class="form-control" type="text" name="name" placeholder="Name" required>
-           <input class="form-control" type="email" name="email" placeholder="email" required>
-           <input class="form-control p1" type="password" name="pass" placeholder="Create password" required>
-           <input class="form-control p2" type="password" name="cnfpass" placeholder="Confirm password" required>
-           <button class="btn btn-primary"  value="submit"> Sign Up</button>
-           <button class="btn btn-warning"> <i class="fas fa-key"></i> Log in</button>
-        </form>
-      </div>
-  </div>
+    <div class="article">
+        <h6 class="texts">
+  
+            <i class="fnts">N</i>otes  is a secure and safe site where you can save you all expances and notes. More than one million users show their trust on us...
 
+        </h6>
+    </div>
+ </div>
+
+ <div class="admin">
+
+
+
+    <div class="abtextx">
+        <h4 class="him"><i class="fnts">H</i>imanshu Sharma</h4>
+        <h3 class="him"> (Project Admin) </h3>
+        <a href="mailto:himanshu399231@gmail.com" class="n">Mail us</a> 
+         <a href="https://github.com/incredible-India" class="n">GitHub</a>
+
+ </div>
 </body>
-<script>
-  function checkValidation(){
-    
 
-    let pass =document.getElementsByClassName('p1');//this is the password
-    let cnfpass =document.getElementsByClassName('p2');//this is the confirm password
-
-    event.preventDefault();
-
-    if(pass[0].value != cnfpass[0].value)
-    {
-      document.getElementsByClassName('alert')[0].style.display ="block";
-      return false ;
-    }else
-    {
-      // location.href='/savedatain'
-      // document.forms[0].action = "/savedatain"
-      document.forms[0].submit();
-      return true ;
-    }
-
-  }
-
-  Array.from(document.getElementsByTagName('input')).forEach(element =>{
-    element.addEventListener('focusin',(event)=>{
-      document.getElementsByClassName('alert')[0].style.display ="none";
-    })
-  })
-</script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
 </html>

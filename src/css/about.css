@@ -1,0 +1,44 @@
+
+@font-face {
+
+    src :url('/../fonts/new.ttf');
+    font-family: new;
+}
+
+.centerDOG{
+
+    margin-top: 25px;
+    padding: 45px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.fnts{
+    font-family: new;
+    color: red;
+    font-size: 40px;
+}
+.texts{
+    margin-top: 25px;
+}
+
+.admin{
+    margin-top: 25px;
+    padding: 45px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+
+}
+
+
+.abtextx{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}

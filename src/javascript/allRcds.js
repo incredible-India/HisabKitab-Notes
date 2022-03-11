@@ -29,7 +29,7 @@ DarkMode.onclick = function (event) {
 
 // function give data from server side in the form of promise 
 async function fetchingApi() {
-  let ApiDTA = await fetch('http://localhost:80/1bfsde1254854ssedwdffefvg5415ffef/123f5d56e871d54s5d45w/2de5656rdfefefef');
+  let ApiDTA = await fetch('http://localhost:80/check/1bfsde1254854ssedwdffefvg5415ffef/123f5d56e871d54s5d45w/2de5656rdfefefef');
 
   let finalData = ApiDTA.json();
 
@@ -39,7 +39,7 @@ async function fetchingApi() {
 
 //changing the user name 
 fetchingApi().then(CDATA => {
-
+  console.log(CDATA);
   if (CDATA.status == true) {
 
   

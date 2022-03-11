@@ -524,14 +524,16 @@ app.get('/allrecords',userauth, async (req, res) => {
 })
 //this will send  user Allinfo
 
-app.get('/1bfsde1254854ssedwdffefvg5415ffef/:key/2de5656rdfefefef',userauth, async (req, res) =>{
+app.get('/check/1bfsde1254854ssedwdffefvg5415ffef/:key/2de5656rdfefefef',userauth, async (req, res) =>{
 
 
     let dataUser =  await req.isAurthised;//this user auth
 
     let apiKey =  req.params.key; //api key from the client
 
+    console.log(apiKey);
     let OriginalKey = process.env.UserApiKey; //original api key from env file
+    console.log(OriginalKey);
 
     if(dataUser) //check user auth 
     {
